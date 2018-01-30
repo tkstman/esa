@@ -1,0 +1,114 @@
+.new-post
+{
+    padding: 16px 0;
+    border-bottom: 1px solid #ccc;
+    
+}
+
+.new-post header,
+.posts header{
+    margin-left: 20px;
+}
+
+.posts .post{
+    padding-left: 10px;
+    border-left: 3px solid #a21b24;
+    margin-bottom: 30px;
+}
+
+.posts .post .info{
+    color: #aaa;
+    font-style: italic;
+}
+
+.error
+{
+    border:1px solid red;
+    background-color:#f9b5af;
+    color:red;
+}
+
+
+.error ul
+{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+.success
+{
+    border:1px solid green;
+    background-color: #d1f9da;
+    color:green;
+}
+
+.custom-file-upload-hidden {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    left: -9999px;
+}
+.custom-file-upload {
+    display: block;
+    width: auto;
+    font-size: 16px;
+    margin-top: 30px;
+    //border: 1px solid #ccc;
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
+.file-upload-wrapper {
+    position: relative; 
+    margin-bottom: 5px;
+    display:  inline-block;
+    //border: 1px solid #ccc;
+}
+.file-upload-input {
+    width: $file-upload-size;
+    color: #fff;
+    font-size: 16px;
+    padding: 11px 17px; 
+    border: none;
+    background-color: $file-upload-color; 
+    @include transition(all 0.2s ease-in); 
+    float: left; /* IE 9 Fix */
+    &:hover, &:focus { 
+        background-color: #c0392b;
+        outline: none; 
+    }
+}
+.file-upload-button {
+    cursor: pointer; 
+    display: inline-block; 
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 11px 20px; 
+    border: none;
+    margin-left: -1px;  
+    background-color: #c0392b; 
+    float: left; /* IE 9 Fix */
+
+    transition: background-color .2s ease-in;
+}
+
+.file-upload-button:hover
+{
+    background-color: #5d1b15;
+}
+
+#addNew
+{
+    margin: 40px;
+    margin-left: 20px;
+}
+
+.myerror
+{    
+    color: darkgrey;
+    font-size: 80%;
+}
