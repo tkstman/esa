@@ -16,6 +16,7 @@ class PostController extends Controller
     public function postCreatePost(Request $request)
     {
         $message= 'There was an error';
+        $supplier='';
         //try {
             $this->validate($request, [
                 'app_name'=>'required|unique:APPLICATIONS,app_nm',
@@ -24,6 +25,16 @@ class PostController extends Controller
                 'app_readme'=>'sometimes|required',
             ]);
             
+            if($request['app_uploader'])
+            {
+                if(trim($request['app_uploader']) === '-')
+                {
+                   return redirect()->back()->withErrors('Please select the App Supplier');
+                }
+
+                $supplier = $request['app_uploader'];
+            }
+        
             $is_url=false;
             $post = new Post();
             $post->app_nm = strtoupper($request['app_name']);
@@ -90,6 +101,11 @@ class PostController extends Controller
             $post->created_dt = $post->aud_dt;
             $post->uploaded_dt = $post->aud_dt;
             $post->aud_uid = Auth::user()->user_name;
+        
+            if($supplier && trim($supplier) !=='')
+            {
+                $post->user_id = $supplier;
+            }
         
             if ($request->user()->posts()->save($post)) {
                 $message = 'Post Successfully Created!';

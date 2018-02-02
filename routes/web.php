@@ -73,10 +73,4 @@ Route::group(['middleware'=>['web']], function () {
         'middleware' => 'auth'
     ]);
     
-    Route::post('accountupdate', [
-        'uses' => 'UserController@postSaveAccount',
-        'as' => 'account.save',
-        'middleware' => 'auth'
-    ]);
-    
 });

@@ -23,8 +23,15 @@ class UserController extends Controller
         if ($db_connx) {
             $user_id= DB::table('users')->where('user_name', $username)->value('user_id');
             $user = User::find($user_id);
-            Auth::login($user);
-            return true;
+
+            if($user){
+            //return redirect()->route('login')->with(['message' => $user_id, 'errstatus'=>1]);
+            //
+                Auth::login($user);
+                return true;
+            }
+            return false;
+            
             
         } else {
             /*echo 'here2';
@@ -49,7 +56,7 @@ class UserController extends Controller
         if (self::loginAttempt($username, $password)) {
             return redirect()->route('dashboard');
         }
-
+ 
         return redirect()->route('login')->with(['message' => 'Login Failed', 'errstatus'=>0]);
         
         //return redirect()->route('home');
@@ -59,9 +66,10 @@ class UserController extends Controller
     public function getAccount()
     {
         if (Auth::user()->isAdmin()) {
-            return view('account', ['user'=> Auth::user()]);
+            $users = User::all();
+            return view('account', ['users'=> $users]);
         }
-        return redirect()->back();
+        return redirect()->back()->withErrors('not admin');
     }
     
     
@@ -77,10 +85,4 @@ class UserController extends Controller
         return redirect()->route('home');
     }
     
-    public function postSaveAccount(Request $request)
-    {
-        $this->validate($request, [
-            'first_name' => 'required|'
-        ]);
-    }
 }

@@ -7,8 +7,8 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto list-unstyled">
-      <li class="nav-item active">
-        <a class="nav-link {{Request::is('/') ? 'active' : ''}}" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item {{Request::is('/') ? 'active' : ''}}">
+        <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
       </li>
       @if(Auth::user())
       <li class="nav-item">
@@ -21,15 +21,15 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>-->
     <ul class="navbar-nav navbar-right">
-         <!--<li class="nav-item active">
-           {{--@if(Auth::user())
+         <li class="nav-item {{Request::is('account') ? 'active' : ''}}">
+           @if(Auth::user())
                @if(Auth::user()->isAdmin())
                 <a class="nav-link" href="{{route('account')}}">Account<span class="sr-only"></span></a>
                @endif
-           @endif--}}
+           @endif
 
-          </li>-->
-        <li class="nav-item active">
+          </li>
+        <li class="nav-item">
            @if(Auth::user())
                 <a class="nav-link" href="{{route('logout')}}">Logout <span class="sr-only"></span></a>
            @else

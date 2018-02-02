@@ -8,6 +8,7 @@
         <title>@yield('title')</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous" type="text/css">
         <link rel="stylesheet" href="{{URL::to('css/main.css')}}">
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
     </head>
     <body>
         @include('includes.header')

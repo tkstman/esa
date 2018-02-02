@@ -399,6 +399,13 @@ $('#uploaders').on('click', function() {
     $('.myerror').removeClass("error");
 });
 
+//Update value displayed in drop downdown menu
+$('.dropdown-item').on('click', function(event) {
+   $('#dropdownMenuButton').text( $(event.target).text() );
+    $('#dropdownMenuButton').attr("data-selected",$(event.target).data('selected'));
+    $('#app_uploader').attr("value",$(event.target).data('selected'));
+});
+
 
 
 
