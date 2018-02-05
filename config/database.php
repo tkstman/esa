@@ -69,11 +69,11 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'DESKTOP-CADDIOB'),  /*eojmw\sqlmw*/
+            'host' => env('DB_HOST', ''), 
             'port' => env('DB_PORT', ''),
-            'database' => env('DB_DATABASE', 'esa'),
-            'username' => env('DB_USERNAME', 'eojappuser'),
-            'password' => env('DB_PASSWORD', 'EOJ@Supp0rt'),
+            'database' => env('DB_DATABASE', ''),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'pooling' => false,
