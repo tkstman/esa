@@ -10,12 +10,12 @@ class UserController extends Controller
 {
     public static function loginAttempt($username, $password)
     {
-        $serverName = "DESKTOP-CADDIOB";//"eojmw\sqlmw";  //// "SYSPRO_3\SQLEXPRESS" ;
+        $serverName = "eojmw\sqlmw";  //// "SYSPRO_3\SQLEXPRESS" ;"DESKTOP-CADDIOB";//
           //// "LAPTOP-4QLRKL82\SQLEXPRESS";
         
 
 
-        $connectionInfo = array( "Database"=>"esa", "UID"=>$username, "PWD"=>$password); ////);EOJ@Supp0rt
+        $connectionInfo = array( "Database"=>"SOFT_WARE", "UID"=>$username, "PWD"=>$password); ////);EOJ@Supp0rt
         $db_connx= sqlsrv_connect($serverName, $connectionInfo);
 
         // = mssql_("eojmw\sqlmw", "tstone", "password");

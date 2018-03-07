@@ -3,7 +3,7 @@
 @section('content')
    @include('includes.message-block')
     <section class="row new-post">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
             <header>
                 <h3>Uploading a new application?</h3>
             </header>
@@ -33,7 +33,7 @@
         </div>
     </section>
     <section class="row posts">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
             <header><h3>Listed Apps</h3></header>
             @foreach($posts as $post)
             <article class="post" data-postid="{{$post->app_id}}">
@@ -66,7 +66,7 @@
     </section>
     
     <div class="modal" tabindex="-1" role="dialog" id='edit-modal'>
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Edit Application</h5>
