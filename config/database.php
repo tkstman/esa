@@ -69,11 +69,11 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', ''), 
-            'port' => env('DB_PORT', ''),
-            'database' => env('DB_DATABASE', ''),
-            'username' => env('DB_USERNAME', ''),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'eojmw\sqlmw'),  /*eojmw\sqlmw*/
+            'port' => '',
+            'database' => env('DB_DATABASE', 'SOFT_WARE'),
+            'username' => env('DB_USERNAME', 'eojappuser'),
+            'password' => env('DB_PASSWORD', 'EOJ@Supp0rt'),
             'charset' => 'utf8',
             'prefix' => '',
             'pooling' => false,

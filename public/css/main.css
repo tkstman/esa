@@ -16,6 +16,21 @@
     margin-bottom: 30px;
 }
 
+.holder
+{
+	padding-top: 10px;
+    padding-bottom: 1px;
+	padding-left: 10px;
+    border-left: 3px solid blue;	
+    margin-bottom: 30px;
+}
+
+.section-title
+{
+	font-weight: 1000;
+	color:slategray;
+}
+
 .posts .post .info{
     color: #aaa;
     font-style: italic;

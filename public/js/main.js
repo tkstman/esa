@@ -2,6 +2,39 @@ var postId = 0;
 var postBodyElement = null;
 //console.log('PostId =' + postId);
 
+// The function actually applying the offset
+/* function offsetAnchor() {
+    if (location.hash.length !== 0) {
+        window.scrollTo(window.scrollX, window.scrollY - 80);
+    }
+}
+
+// This will capture hash changes while on the page
+$(window).on("hashchange", function () {
+    offsetAnchor();
+});
+
+// Let the page finish loading.
+$(document).ready(function() {
+    offsetAnchor();
+}); */
+
+$(document).ready(function(){
+	$('a[href^="#"]').on('click',function (e) {
+	    e.preventDefault();
+
+	    var target = this.hash;
+	    var $target = $(target);
+
+	    $('html, body').stop().animate({
+	        'scrollTop': $target.offset().top-70
+	    }, 900, 'swing', function () {
+	        window.location.hash = target-80;
+	    });
+	});
+});
+
+
 function isUrlJs(value)
 {
     var validation = new RegExp('^((http|https|ftp)?:\\/\\/){1}?'+ // protocol

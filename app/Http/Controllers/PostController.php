@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -131,8 +132,9 @@ class PostController extends Controller
             //$query->orderBy('last_nm', 'desc');
             //$query->orderBy('created_dt', 'desc');
         }]);*/
-        $posts = Post::orderBy('user_id', 'asc')->orderBy('created_dt', 'desc')->get();
-        return view('welcome', ['posts'=>$posts]);
+        $posts = Post::orderBy('user_id', 'asc')->orderBy('app_nm', 'asc')->get();
+		$sidebar = User::hydrate(DB::select('select * from users where [SOFT_WARE].dbo.USERS.user_id in (select distinct APPLICATIONS.user_id from APPLICATIONS) order by frst_nm'));
+        return view('welcome', ['posts'=>$posts, 'sidebar'=>$sidebar]);
         //orderBy('frst_nm', 'DESC')->orderBy('last_nm', 'DESC')->
     }
     
