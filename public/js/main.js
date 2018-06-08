@@ -27,9 +27,9 @@ $(document).ready(function(){
 	    var $target = $(target);
 
 	    $('html, body').stop().animate({
-	        'scrollTop': $target.offset().top-70
+	        'scrollTop': $target.offset().top-110
 	    }, 900, 'swing', function () {
-	        window.location.hash = target-80;
+	        window.location.hash = target-120;
 	    });
 	});
 });
@@ -440,6 +440,37 @@ $('.dropdown-item').on('click', function(event) {
 });
 
 
+$('.slideout').on('click', function(){
+	//WHEN CLICKED CHECK IF PANEL HAS ACTIVE CLASS
+	
+	//IF IT DOES NOT HAVE ACTIVE THEN
+	
+	//REMOVE ACTIVE FROM THE PANEL THAT HAS IT AND INITIATE A CHANGE IN ITS LEFT VALUE AND  HAVE IT SLIDE OUT OF VIEW
+	
+	//ADD ACTIVE TO THE CURRENT SELECTION AND HAVE IT SLIDE INTO VIEW BY SETTING LEFT VALUE TO 0
+	if(!$(this).hasClass(".active"))
+	{
+		console.log($('.active').attr("data-name"));
+		$('#' + $('.active').attr("data-name")).css({
+			'left':'-3750px',
+		});
+		$('.active').removeClass('active');
+		
+		$('#'+$(this).attr("data-name")).css({
+			'left':'-21px',
+			});
+			console.log('hi');
+			console.log($(this).attr("data-name"));
+			
+		$(this).addClass("active");
+	}
+});
+
+// $('.slideout').on('mouseleave', function(){
+	// $('#'+$(this).attr("data-name")).css({
+		// 'left':'-450px'
+		// });
+// });
 
 
 

@@ -13,7 +13,12 @@
 .posts .post{
     padding-left: 10px;
     border-left: 3px solid #a21b24;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+	padding-right: 10px;
+	background-color: #cecece;
+	width:275.86px;
+	float: left;
+	margin-right: 15px;
 }
 
 .holder
@@ -23,6 +28,10 @@
 	padding-left: 10px;
     border-left: 3px solid blue;	
     margin-bottom: 30px;
+	float:left;
+	padding-right: 10px;
+	width: 920px;
+	background-color: rgba(90, 71, 71, 0.38);
 }
 
 .section-title
@@ -127,3 +136,64 @@
     color: darkgrey;
     font-size: 80%;
 }
+
+
+.slideout {
+  cursor: pointer;
+  left: 0;
+  border-bottom: 1px solid #0073b9;
+  border-left: 2px solid red;
+  background-color:#cecece;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.slideout_inner {
+  position: absolute;
+  top: -32px;
+  left: -3750px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+/* #slideout:hover { */
+  /* left: 250px; */
+/* } */
+.slideout:hover + #slideout_inner {
+  left: 80px;
+  visibility:0;
+}
+
+.appscontainer
+{
+	margin-left: 36px;
+}
+
+#top{
+	background-color: black;
+    border-left: 3px solid blue;
+    border-bottom: 4px solid #a21b24;
+}
+
+.col-md-2.d-none.d-md-block.bg-light.sidebar.navbar-fixed-top
+{
+	margin-left: 0px!important;
+}
+
+h4.section-title
+{
+	font-size: 14px!important;
+}
+
+.post > p > a, .post > p
+{
+	font-size:10px!important;
+}
+
+.post > p:first-child
+{
+	font-size:10px!important;
+}
+
