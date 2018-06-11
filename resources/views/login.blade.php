@@ -7,10 +7,10 @@
 @section('content')
     @include('includes.message-block')
 
-    <div class="row">
+    <div class="row login">
         <div class="col-md-6 mx-auto">
             <h3>Login</h3>
-            <div class="jumbotron">
+            <div class="jumbotron login">
             <form action="{{route('login')}}" method="post">
                 <div class="form-group  {{$errors->has('user_name') ? 'has-danger' : '' }}">
                     <label for="user_name">Username</label>

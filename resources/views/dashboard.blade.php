@@ -33,7 +33,7 @@
         </div>
     </section>
     <section class="row posts">
-        <div class="col-md-6">
+        <div class="col-md-6 holder dash">
             <header><h3>Listed Apps</h3></header>
             @foreach($posts as $post)
             <article class="post" data-postid="{{$post->app_id}}">
@@ -67,9 +67,9 @@
     
     <div class="modal" tabindex="-1" role="dialog" id='edit-modal'>
       <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content contlucent">
           <div class="modal-header">
-            <h5 class="modal-title">Edit Application</h5>
+            <h5 class="modal-title lucent">Edit Application</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -77,7 +77,7 @@
           <div class="modal-body">
             <span class="myerror"></span>
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post" id="uploaders">
-               <div class="jumbotron">
+               <div class="jumbotron lucent">
                                   
                     <div class="form-group">
                         <label for="edit_name">Application Name</label>
@@ -145,16 +145,16 @@
 
     <div class="modal" tabindex="-1" role="dialog" id='add-modal'>
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content contlucent">
           <div class="modal-header">
-            <h5 class="modal-title">New Application</h5>
+            <h5 class="modal-title lucent">New Application</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
-               <div class="jumbotron">               
+               <div class="jumbotron lucent">               
                     <div class="form-group">
                        <div class="input-group mb-3">
                            <input class="form-control" name="app_name" id="app_name" rows="1" placeholder="Application Name" type="text"/>

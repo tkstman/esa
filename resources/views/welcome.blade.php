@@ -16,6 +16,10 @@
 					<p class="lead">
 						Welcome to the Electoral Office Software Hub Application. 
 					</p>
+					<p style="font-size: 14px;">
+						<span  class="arrow" style="font-size:  30px; top: 4px; position: relative;">&#x21FD;</span>
+						Select A Name To See The Associated Applications. 
+					</p>
 				</div>
 			</div>
 			<!--<div >
@@ -44,7 +48,7 @@
 						@foreach($posts as $post)
 							@if($post->user->user_id == $user->user_id)
 							<article class="post" data-postid="{{$post->app_id}}">
-								<p> {{strtoupper($post->app_nm)}}        
+								<p title="{{strtoupper($post->app_nm)}}"> {{strtoupper($post->app_nm)}}        
 								</p>
 								<p>
 									<a class="btn btn-info btn-sm" href="{{$post->app_path}}" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">Download</a> |
