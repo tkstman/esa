@@ -200,7 +200,7 @@ h4.section-title
 body
 {
     background-color: #a5a5a5;
-    background: linear-gradient(-90deg, #f1a7a7, yellow);
+    background: linear-gradient(-90deg,  #bdbdbd, #ce9090);
 }
 
 
@@ -299,4 +299,14 @@ body
 
 .jumbotron.login{
 	background-color: #4e4e4e36;
+}
+
+h4.section-title
+{
+	color:#364452!important;
+}
+
+.jumbotron.lucent.add_for > div > label
+{
+	color:black!important;
 }

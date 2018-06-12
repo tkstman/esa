@@ -12,16 +12,16 @@
     </section>
     <div class="modal" tabindex="-1" role="dialog" id='add-modal'>
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content contlucent">
           <div class="modal-header">
-            <h5 class="modal-title">New Application</h5>
+            <h5 class="modal-title lucent">New Application</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
-               <div class="jumbotron">               
+               <div class="jumbotron lucent add_for">               
                     <div class="form-group">
                        <div class="input-group mb-3">
                            <input class="form-control" name="app_name" id="app_name" rows="1" placeholder="Application Name" type="text"/>
