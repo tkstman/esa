@@ -190,10 +190,12 @@ h4.section-title
 
 .post > p > a, .post > p
 {
-	font-size:10px!important;
+	font-size:12px!important;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+	color: black;
+	font-weight: bold;
 }
 
 
