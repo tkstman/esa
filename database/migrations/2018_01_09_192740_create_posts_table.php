@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
         $table->text('app_path');
         $table->string('app_manual_path')->nullable();
         $table->string('app_readme_path')->nullable();
+		$table->string('app_appicon')->nullable();
         $table->integer('user_id');
         $table->boolean('is_url');
         $table->timestamp('created_dt')->nullable(false);

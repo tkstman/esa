@@ -87,8 +87,8 @@
                         <label for="app_file">Application File</label>
                         <label class="float-right">Is Url</label>
                         <div class="input-group mb-3">
-                            <input class="custom-file-upload-hidden" type="file" name="edit_file" id="edit_files" />
-                            <input type="text" class="form-control dummy" id="edit_file">
+                            <input class="custom-file-upload-hidden" type="file" name="edit_file" id="edit_files" placeholder="Enter Url | http://intranet"/>
+                            <input type="text" class="form-control dummy" id="edit_file" >
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-secondary select-butn" tabindex="-1">Select New File</button>
                                 <div class="input-group-append">|
@@ -104,7 +104,7 @@
                     <div class="form-group">
                         <label for="app_manual">Manual</label>
                         <div class="input-group mb-3">
-                            <input class="custom-file-upload-hidden" type="file" name="edit_manual" id="edit_manuals"/>
+                            <input class="custom-file-upload-hidden" type="file" name="edit_manual" id="edit_manuals"  placeholder="Enter Url | http://intranet"/>
                             <input type="text" class="form-control dummy" id="edit_manual">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-secondary select-butn" tabindex="-1">Select New File</button>
@@ -119,8 +119,8 @@
                     <div class="form-group">
                         <label for="app_readme">Read me</label>
                         <div class="input-group mb-3">
-                            <input class="custom-file-upload-hidden" type="file" name="edit_readme" id="edit_readmes"/>
-                            <input type="text" class="form-control dummy" id="edit_readme">
+                            <input class="custom-file-upload-hidden" type="file" name="edit_readme" id="edit_readmes" placeholder="Enter Url | http://intranet"/>
+                            <input type="text" class="form-control dummy" id="edit_readme" >
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-secondary select-butn" tabindex="-1">Select New File</button>
                                 <div class="input-group-append">|
@@ -130,7 +130,22 @@
                                 </div> 
                             </div>
                         </div>
-                    </div>                    
+                    </div>   
+					<div class="form-group">
+							<label for="edit_appicon">App Icon</label>
+							<div class="input-group mb-3">
+								<input class="custom-file-upload-hidden" type="file" name="edit_appicon" id="edit_appicons" data-text=""  placeholder="Enter Url | http://intranet">
+								<input type="text" class="form-control dummy" id="edit_appicon" data-text="">
+								<div class="input-group-append">
+									<button type="button" class="btn btn-outline-secondary select-butn" tabindex="-1">Select New File</button>
+									<div class="input-group-append">|
+										<div class="input-group-text">
+										  <input class="editcheckbox" type="checkbox" aria-label="checkbox_app_file">
+										</div>
+									</div> 
+								</div>
+							</div>
+						</div>							
                     {{Form::token()}}
                 </div>
             </form>
@@ -200,6 +215,17 @@
                             </div>
                         </div>
                     </div>
+					<div class="form-group">
+                        <label for="app_appicon">App Icon</label>
+                        <div class="input-group mb-3">   
+                            <input class="form-control" type="file" name="app_appicon" id="app_appicon"/>
+                            <div class="input-group-append"> |
+                                <div class="input-group-text">
+                                  <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>					
                     <button type="submit" class="btn-primary">Post New App</button>
                     {{Form::token()}}
                 </div>

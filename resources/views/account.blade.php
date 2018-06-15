@@ -82,6 +82,17 @@
                             
                          </div>
                     </div>
+					<div class="form-group">
+                        <label for="app_appicon">App Icon</label>
+                        <div class="input-group mb-3">   
+                            <input class="form-control" type="file" name="app_appicon" id="app_appicon"/>
+                            <div class="input-group-append"> |
+                                <div class="input-group-text">
+                                  <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn-primary">Post New App</button>
                     {{Form::token()}}
                 </div>

@@ -69,7 +69,7 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'eojmw\sqlmw'),  /*eojmw\sqlmw*/
+            'host' => env('DB_HOST', 'SYSPRO_3_7040'),  /*eojmw\sqlmw SYSPRO_3_7040*/
             'port' => '',
             'database' => env('DB_DATABASE', 'SOFT_WARE'),
             'username' => env('DB_USERNAME', 'eojappuser'),
