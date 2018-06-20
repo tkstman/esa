@@ -37,19 +37,24 @@
             <header><h3>Listed Apps</h3></header>
             @foreach($posts as $post)
             <article class="post" data-postid="{{$post->app_id}}">
-                <p> {{strtoupper($post->app_nm)}}        
-                </p>
-                <p><a class="btn btn-info btn-sm" href="{{$post->app_path}}" data-title="appfile" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">App</a> |
-                  @if($post->isSet($post->app_manual_path))
-                   <a class="btn btn-info btn-sm" href="{{$post->app_manual_path}}" data-title="manual" {{$post->isUrl($post->app_manual_path) ? 'target="_blank"' : 'download'}}  data-name="{{$post->app_manual_path}}">Manual</a> |
-                   @endif  
-                   @if($post->isSet($post->app_readme_path))
-                       <a class="btn btn-info btn-sm" href="{{$post->app_readme_path}}" data-title="readme" {{$post->isUrl($post->app_readme_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_readme_path}}">Read Me</a> |
-                   @endif                                    
-                </p>
-                <div class="info">
-                    Posted by {{$post->user->frst_nm . " ".$post->user->last_nm}} on {{$post->created_dt}}
-                </div>
+				<div>
+					<img class="icon" src="{{$post->isSet($post->app_icon_path) ? $post->app_icon_path : 'uploads/noimageicon.png' }}" alt="Image" data-title="{{$post->isSet($post->app_icon_path) ? 'set' : 'default' }}"/>
+				</div>
+				<div>
+					<p> {{strtoupper($post->app_nm)}}        
+					</p>
+					<p><a class="btn btn-info btn-sm" href="{{$post->app_path}}" data-title="appfile" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">App</a> |
+					  @if($post->isSet($post->app_manual_path))
+					   <a class="btn btn-info btn-sm" href="{{$post->app_manual_path}}" data-title="manual" {{$post->isUrl($post->app_manual_path) ? 'target="_blank"' : 'download'}}  data-name="{{$post->app_manual_path}}">Manual</a> |
+					   @endif  
+					   @if($post->isSet($post->app_readme_path))
+						   <a class="btn btn-info btn-sm" href="{{$post->app_readme_path}}" data-title="readme" {{$post->isUrl($post->app_readme_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_readme_path}}">Read Me</a> |
+					   @endif                                    
+					</p>
+					<div class="info">
+						Posted by {{$post->user->frst_nm . " ".$post->user->last_nm}} on {{$post->created_dt}}
+					</div>
+				</div>
                 <div class="interaction">
                    <!--<a href="#">Like</a> |
                    <a href="#">DisLike</a>--> 

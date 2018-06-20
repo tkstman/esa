@@ -2,37 +2,7 @@ var postId = 0;
 var postBodyElement = null;
 //console.log('PostId =' + postId);
 
-// The function actually applying the offset
-/* function offsetAnchor() {
-    if (location.hash.length !== 0) {
-        window.scrollTo(window.scrollX, window.scrollY - 80);
-    }
-}
 
-// This will capture hash changes while on the page
-$(window).on("hashchange", function () {
-    offsetAnchor();
-});
-
-// Let the page finish loading.
-$(document).ready(function() {
-    offsetAnchor();
-}); */
-
-$(document).ready(function(){
-	$('a[href^="#"]').on('click',function (e) {
-	    e.preventDefault();
-
-	    var target = this.hash;
-	    var $target = $(target);
-
-	    $('html, body').stop().animate({
-	        'scrollTop': $target.offset().top-110
-	    }, 900, 'swing', function () {
-	        window.location.hash = target-120;
-	    });
-	});
-});
 
 
 function isUrlJs(value)
@@ -97,18 +67,20 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
     //Get App Name
     postBodyElement =event.target.parentNode.parentNode; //Posted Article Element
     //console.log(postBodyElement);
-    var postName = postBodyElement.childNodes[1].textContent.trim(); //The posted App Name from html
+	//console.log(postBodyElement.childNodes[3].childNodes[1].textContent.trim());
+    var postName = postBodyElement.childNodes[3].childNodes[1].textContent.trim(); //The posted App Name from html
     postId = event.target.parentNode.parentNode.dataset['postid'];//Posted Article Element data-attribute called postid
-    //console.log(event.target.parentNode.parentNode);
+    //console.log(postBodyElement.childNodes[2].childNodes[1].textContent.trim());
+	//console.log(event.target.parentNode.parentNode);
     $('#edit_name').val(postName); //Set the Edit Modals Name Field To posted App Name from html
     $('#edit_name').attr('data-text',postName);
     
     //Get App File
-    if(event.target.parentNode.parentNode.childNodes[3].childNodes[0]) //Check if the App Exe file Link exists in the htmlw
+    if(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[0]) //Check if the App Exe file Link exists in the htmlw
     {
-        //console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[0]);
+        //console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[0]);
         //Get the data-name element value and assign the it to the edit modal's file name text dummy field
-        var postFile = event.target.parentNode.parentNode.childNodes[3].childNodes[0].getAttribute('data-name');
+        var postFile = event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[0].getAttribute('data-name');
          //console.log(postFile);
         //if the value is a link
         if(isUrlJs(postFile))
@@ -134,15 +106,15 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
     
     
     //Get App Manual
-    
-    if(event.target.parentNode.parentNode.childNodes[3].childNodes[2] && event.target.parentNode.parentNode.childNodes[3].childNodes[2].dataset.title=="manual") //Check if the Manual file Link exists in the htmlw
+    //console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2]);
+    if(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2] && event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2].dataset.title=="manual") //Check if the Manual file Link exists in the htmlw
     {
         //Get the data-name element value and assign the it to the edit modal's Manual text dummy field
-        //console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[2]);
-        var postMan = event.target.parentNode.parentNode.childNodes[3].childNodes[2].getAttribute('data-name');
+        //
+        var postMan = event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2].getAttribute('data-name');
        
         
-        console.log(postMan);
+        //console.log(postMan);
         //if the value is a link
         if(isUrlJs(postMan))
         {
@@ -163,7 +135,8 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
     
     
     //Get App Readme
-    var postyr = event.target.parentNode.parentNode.childNodes[3].childNodes[4] ? event.target.parentNode.parentNode.childNodes[3].childNodes[4] : event.target.parentNode.parentNode.childNodes[3].childNodes[2]
+	//console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4]);
+    var postyr = event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4] ? event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4] : event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2];
                        
 
     if( postyr && postyr.dataset.title =="readme")
@@ -188,6 +161,39 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
             $('#edit_readme').attr('data-text',postRead);
         }
     }
+	
+	
+	//Get App Icon
+	//console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4]);
+    var iconyr = event.target.parentNode.parentNode.childNodes[1].childNodes[1] ? event.target.parentNode.parentNode.childNodes[1].childNodes[1] : event.target.parentNode.parentNode.childNodes[1].childNodes[1];
+    //console.log(iconyr);
+
+    if( iconyr && iconyr.dataset.title =="set")
+    {
+        //Get the src attribute value and assign the it to the edit modal's icon text dummy field Link 
+        var postRead = iconyr.getAttribute('src');
+        //if the value is a link
+        if(isUrlJs(postRead))
+        {
+            //issue check box click event for current Input field section on edit modal
+            document.getElementById('edit_appicons').parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1].click();
+            
+            
+            //Set Actually Input Field To data attibute value
+            $('#edit_appicons').val(postRead);
+            $('#edit_appicons').attr('data-text',postRead);
+        }
+        else{
+            postRead = postRead.substr(postRead.indexOf("/") + 1, postRead.length - 1);
+            postRead = postRead.substr(postRead.indexOf("/") + 1, postRead.length - 1);
+            $('#edit_appicon').val(postRead);
+            $('#edit_appicon').attr('data-text',postRead);
+        }
+    }
+	
+	
+	
+	
     //Get App All
     
     //Re enable the save edit button and show the modal
@@ -325,10 +331,11 @@ $('#modal-save').on('click', function () {
     datam.append('edit_files', $('#edit_files').attr('type') == 'file' ? $('#edit_files')[0].files[0] : $('#edit_files').val());
     datam.append('edit_manuals', $('#edit_manuals').attr('type') == 'file' ? $('#edit_manuals')[0].files[0] : $('#edit_manuals').val());
     datam.append('edit_readmes', $('#edit_readmes').attr('type') == 'file' ? $('#edit_readmes')[0].files[0] : $('#edit_readmes').val());
+	datam.append('edit_appicons', $('#edit_appicons').attr('type') == 'file' ? $('#edit_appicons')[0].files[0] : $('#edit_appicons').val());
     datam.append('is_url', false);
     datam.append('postId', postId);
     datam.append('_token', token);
-    console.log('all formvalues sent');
+    //console.log('all formvalues sent');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -344,59 +351,60 @@ $('#modal-save').on('click', function () {
         dataType: 'json'
         
     }).done(function (msg) {
-        console.log('ano values sent');
+        //console.log('ano values sent');
         //console.log('hi');
         //console.log($(postBodyElement));
         var resp = JSON.parse(JSON.stringify(msg));//JSON.parse(msg);
         console.log(JSON.stringify(msg));
+		console.log(resp);
         
         if(resp.errstatus==0)
         {
-            console.log($(postBodyElement.childNodes[3].childNodes[4]));
+            //console.log($(postBodyElement.childNodes[3].childNodes[4]));
             $('#modal-save').prop('disabled',false);
             $('.myerror').text(resp.message);
         }
         else{        
             //assigning when json is returned
-            $(postBodyElement.childNodes[1]).text(resp.post_updated.app_nm);
+            $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm);
 
             
             /*
                 APP FILE DETAILS HANDLING
             */
-            console.log( $(postBodyElement.childNodes[3].childNodes[0]));
+            //console.log( $(postBodyElement.childNodes[3].childNodes[0]));
             if(isUrlJs(resp.post_updated.app_path))
             {
-                $(postBodyElement.childNodes[3].childNodes[0]).removeAttr('download');
-                $(postBodyElement.childNodes[3].childNodes[0]).attr('target','_blank');
+                $(postBodyElement.childNodes[3].childNodes[3].childNodes[0]).removeAttr('download');
+                $(postBodyElement.childNodes[3].childNodes[3].childNodes[0]).attr('target','_blank');
             }
-            $(postBodyElement.childNodes[3].childNodes[0]).attr("href",resp.post_updated.app_path );
+            $(postBodyElement.childNodes[3].childNodes[3].childNodes[0]).attr("href",resp.post_updated.app_path );
 
-            $(postBodyElement.childNodes[3].childNodes[0]).attr("data-name",resp.post_updated.app_path) ;
+            $(postBodyElement.childNodes[3].childNodes[3].childNodes[0]).attr("data-name",resp.post_updated.app_path) ;
 
             /*
                 README FILE DETAILS HANDLING
             */
-           console.log($(postBodyElement.childNodes[3].childNodes[4]).length);
+           //console.log($(postBodyElement.childNodes[3].childNodes[4]).length);
             //check if the readme already exists. if not then add it
             
             
             if(isUrlJs(resp.post_updated.app_readme_path))
             {
-                if($(postBodyElement.childNodes[3].childNodes[4]).length<1)
+                if($(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).length<1)
                 {
-                    $(postBodyElement.childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_readme_path + '" data-title="readme" target="_blank" data-name="'+resp.post_updated.app_readme_path+'">Read Me</a> |');
+                    $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_readme_path + '" data-title="readme" target="_blank" data-name="'+resp.post_updated.app_readme_path+'">Read Me</a> |');
                 }
-                $(postBodyElement.childNodes[3].childNodes[4]).removeAttr('download');
-                $(postBodyElement.childNodes[3].childNodes[4]).attr('target','_blank');
+                $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).removeAttr('download');
+                $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).attr('target','_blank');
             }
-            else if($(postBodyElement.childNodes[3].childNodes[4]).length<1 && resp.post_updated.app_readme_path !==null)
+            else if($(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).length<1 && resp.post_updated.app_readme_path !==null)
             {
-                $(postBodyElement.childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_readme_path + '" data-title="readme" download data-name="'+resp.post_updated.app_readme_path+'">Read Me</a> |');
+                $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_readme_path + '" data-title="readme" download data-name="'+resp.post_updated.app_readme_path+'">Read Me</a> |');
             }
-            $(postBodyElement.childNodes[3].childNodes[4]).attr("href",resp.post_updated.app_readme_path );
+            $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).attr("href",resp.post_updated.app_readme_path );
 
-            $(postBodyElement.childNodes[3].childNodes[4]).attr("data-name",resp.post_updated.app_readme_path) ;
+            $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).attr("data-name",resp.post_updated.app_readme_path) ;
             
            
            /*
@@ -404,21 +412,37 @@ $('#modal-save').on('click', function () {
             */
            if(isUrlJs(resp.post_updated.app_manual_path))
            {
-               if($(postBodyElement.childNodes[3].childNodes[2]).length<1)
+               if($(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).length<1)
                 {
-                    $(postBodyElement.childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" target="_blank" data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
+                    $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" target="_blank" data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
                 }
                
-               $(postBodyElement.childNodes[3].childNodes[2]).removeAttr('download');
-               $(postBodyElement.childNodes[3].childNodes[2]).attr('target','_blank');
+               $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).removeAttr('download');
+               $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr('target','_blank');
            }
-           else if($(postBodyElement.childNodes[3].childNodes[2]).length<1 && resp.post_updated.app_manual_path !==null)
+           else if($(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).length<1 && resp.post_updated.app_manual_path !==null)
            {
-               $(postBodyElement.childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" download data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
+               $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" download data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
            }
            
-           $(postBodyElement.childNodes[3].childNodes[2]).attr("href",resp.post_updated.app_manual_path );
-           $(postBodyElement.childNodes[3].childNodes[2]).attr("data-name", resp.post_updated.app_manual_path) ;
+           $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr("href",resp.post_updated.app_manual_path );
+           $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr("data-name", resp.post_updated.app_manual_path) ;
+		   
+		   
+		   /*
+                ICON FILE DETAILS HANDLING
+            */
+			
+           if(resp.post_updated.app_icon_path !==null)
+           {
+			   $(postBodyElement.childNodes[1].childNodes[1]).attr("src", resp.post_updated.app_icon_path);
+			   $(postBodyElement.childNodes[1].childNodes[1]).attr("data-title", "set") ;               
+           }
+           
+
+           
+           
+		   
            $('#modal-save').prop('disabled',false);
            $('#edit-modal').modal('hide');
         }
@@ -450,7 +474,7 @@ $('.slideout').on('click', function(){
 	//ADD ACTIVE TO THE CURRENT SELECTION AND HAVE IT SLIDE INTO VIEW BY SETTING LEFT VALUE TO 0
 	if(!$(this).hasClass(".active"))
 	{
-		console.log($('.active').attr("data-name"));
+		//console.log($('.active').attr("data-name"));
 		$('#' + $('.active').attr("data-name")).css({
 			'left':'-3750px',
 		});
@@ -459,8 +483,8 @@ $('.slideout').on('click', function(){
 		$('#'+$(this).attr("data-name")).css({
 			'left':'-21px',
 			});
-			console.log('hi');
-			console.log($(this).attr("data-name"));
+			//console.log('hi');
+			//console.log($(this).attr("data-name"));
 			
 		$(this).addClass("active");
 	}
@@ -474,18 +498,69 @@ $('.slideout').on('click', function(){
 
 
 
+/*
+	Change the background of the jumbotron to a transparent colour on scrolling to height of the header plus 30px
+*/
+var headerlower =  $('.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top').height() +15; // $('.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top').offset().top +
+var lumfader = function(){
+		stop = Math.round($(window).scrollTop())+30 ;
+		
+		// console.log(stop);
+		// console.log(headerlower);
+		if(stop > headerlower)
+		{
+			$('#top').addClass('jumfade');
+		}
+		else
+		{
+			$('#top').removeClass('jumfade');
+		}
+};
+
+$(window).on('scroll', lumfader
+);
 
 
 
 
 
+// The function actually applying the offset
+/* function offsetAnchor() {
+    if (location.hash.length !== 0) {
+        window.scrollTo(window.scrollX, window.scrollY - 80);
+    }
+}
 
+// This will capture hash changes while on the page
+$(window).on("hashchange", function () {
+    offsetAnchor();
+});
 
+// Let the page finish loading.
+$(document).ready(function() {
+    offsetAnchor();
+}); */
 
+$(document).ready(function(){
+	lumfader();
+	$('a[href^="#"]').on('click',function (e) {
+	    e.preventDefault();
 
-
-
-
+	    var target = this.hash;
+	    var $target = $(target);
+		// console.log(target);
+		// console.log($target);
+		// console.log($target.offset());
+		if(typeof $target.offset() != "undefined")
+		{
+			$('html, body').stop().animate({
+				'scrollTop': $target.offset().top-110
+			}, 900, 'swing', function () {
+				window.location.hash = target-120;
+			});
+		}
+	});
+});
 
 
 

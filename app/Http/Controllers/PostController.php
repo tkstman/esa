@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     public $main = 'uploads/';
-	//public $allowedMimeTypes =  ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+	public $allowedMimeTypes =  ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+	public $php_logo= 'uploads/noimageicon.png';
     //
     public function postCreatePost(Request $request)
     {
@@ -27,7 +28,7 @@ class PostController extends Controller
                 'app_manual'=>'sometimes|required',
                 'app_readme'=>'sometimes|required',
             ]);
-            return redirect()->back()->withErrors('Got Here');
+            //return redirect()->back()->withErrors('Got Here');
             if($request['app_uploader'])
             {
                 if(trim($request['app_uploader']) === '-')
@@ -101,24 +102,23 @@ class PostController extends Controller
                 $is_url=true;
             }
 			
-			// if ($request->hasFile('app_appicon') ) {
-				// $contentType = mime_content_type($request->file('app_appicon')->getPathName());
-                // if ($request->file('app_appicon')->isValid() && in_array($contentType, $this->allowedMimeTypes)) {
-                    // $app_appiconDestinationPath = $this->main . Auth::user()->user_name;
-                    // $app_appiconFile = $request->file('app_appicon');
-                    // $app_appiconFileName = $request->file('app_appicon')->getClientOriginalName();
-                    // //$readmeFileExt = $readmeFile->getClientOriginalExtension();
-                    // $app_appiconFileSaveLoc = rand(111111, 999999). $app_appiconFileName ;//.".".$readmeFileExt;
-                    // $app_appiconFile->move($app_appiconDestinationPath, $app_appiconFileSaveLoc);
-                    // $post->app_icon_path = $app_appiconDestinationPath.'/'.$app_appiconFileSaveLoc;
-                // } else {
-                    // $message = 'Invalid File For Readme Supplied!';
-                    // return redirect()->route('dashboard')->with(['message' => $message, 'errstatus'=>0]);
-                // }
-            // } else if (preg_match($validation, trim($request['app_appicon'])) && in_array(mime_content_type($request->file('app_appicon')->getPathName()), $this->allowedMimeTypes) ) {
-                // $post->app_icon_path = trim($request['app_appicon']);
-                // $is_url=true;
-            // }
+			if ($request->hasFile('app_appicon') ) {
+				$contentType = mime_content_type($request->file('app_appicon')->getPathName());
+                if ($request->file('app_appicon')->isValid() && in_array($contentType, $this->allowedMimeTypes)) {
+                    $app_appiconDestinationPath = $this->main . Auth::user()->user_name;
+                    $app_appiconFile = $request->file('app_appicon');
+                    $app_appiconFileName = $request->file('app_appicon')->getClientOriginalName();
+                    $app_appiconFileSaveLoc = rand(111111, 999999). $app_appiconFileName ;
+                    $app_appiconFile->move($app_appiconDestinationPath, $app_appiconFileSaveLoc);
+                    $post->app_icon_path = $app_appiconDestinationPath.'/'.$app_appiconFileSaveLoc;
+                } else {
+                    $message = 'Invalid File For App Icon Supplied!' . $contentType;
+                    return redirect()->route('dashboard')->with(['message' => $message, 'errstatus'=>0]);
+                }
+            } else if (preg_match($validation, trim($request['app_appicon'])) && in_array( get_headers($request['app_appicon'],1)['Content-Type'] , $this->allowedMimeTypes) ) {
+                $post->app_icon_path = trim($request['app_appicon']);
+                $is_url=true;
+            }
 
             $post->is_url = $is_url;
             $post->aud_dt = date('Y-m-d H:i:s');
@@ -321,36 +321,38 @@ class PostController extends Controller
                 
             }
 			
-			// if($request->has('edit_appicons') )
-            // {
-                // if($request->hasFile('edit_appicons') && $request->file('edit_appicons')->isValid())
-                // {
-                    // if( file_exists($post->app_icon_path) )
-                    // {
-                        // //delete file 
-                        // if(!unlink(public_path($post->app_icon_path))){
-                            // throw new \Exception("failed to delete readme");
-                        // }  
-                    // }
-                    // //update with new file
+			if($request->has('edit_appicons') )
+            {
+				//$contentType = ;				
+				
+                if($request->hasFile('edit_appicons') && $request->file('edit_appicons')->isValid() && in_array(mime_content_type($request->file('edit_appicons')->getPathName()), $this->allowedMimeTypes))
+                {
+                    if( file_exists($post->app_icon_path) )
+                    {
+                        //delete file 
+                        if(!unlink(public_path($post->app_icon_path))){
+                            throw new \Exception("failed to delete readme");
+                        }  
+                    }
+                    //update with new file
 
-                    // $appDestinationPath = $this->main . $post->user->user_name;
-                    // $appFile = $request->file('edit_appicons');
-                    // $appFileName = $request->file('edit_appicons')->getClientOriginalName();
-                    // //$appFileExt = $appFile->getClientOriginalExtension();
-                    // $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
-                    // $appFile->move($appDestinationPath, $appFileSaveLoc);
-                    // $post->app_icon_path = $appDestinationPath.'/'.$appFileSaveLoc; 
-                    // $change=true;   
+                    $appDestinationPath = $this->main . $post->user->user_name;
+                    $appFile = $request->file('edit_appicons');
+                    $appFileName = $request->file('edit_appicons')->getClientOriginalName();
+                    //$appFileExt = $appFile->getClientOriginalExtension();
+                    $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
+                    $appFile->move($appDestinationPath, $appFileSaveLoc);
+                    $post->app_icon_path = $appDestinationPath.'/'.$appFileSaveLoc; 
+                    $change=true;   
                     
-                // }     
-                // else if(preg_match($validation, trim($request['edit_appicons'])) && trim($request['edit_appicons']) !==$post->app_icon_path  )
-                // {
-                    // $post->app_icon_path =trim($request['edit_appicons']);
-                    // $change=true;
-                // }
+                }     
+                else if(preg_match($validation, trim($request['edit_appicons'])) && in_array( get_headers($request['edit_appicons'],1)['Content-Type'] , $this->allowedMimeTypes) && trim($request['edit_appicons']) !==$post->app_icon_path  )
+                {
+                    $post->app_icon_path =trim($request['edit_appicons']);
+                    $change=true;
+                }
                 
-            // }
+            }
 
             
 
@@ -370,7 +372,7 @@ class PostController extends Controller
         }
         catch(\Throwable $e)
         {
-            return response()->json(['message' => "Unexpected Error Thrown" , 'errstatus'=>0], 200); //. $e->getMessage() . $e->getLine() . $e->getFile()
+            return response()->json(['message' => "Unexpected Error Thrown" . $e->getMessage() ." ". $e->getLine() ." ". $e->getFile(), 'errstatus'=>0], 200); //
         }
     }
 }

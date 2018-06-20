@@ -16,7 +16,7 @@
     margin-bottom: 10px;
 	padding-right: 10px;
 	background-color: #ffffff69;
-	width:275.86px;
+	width:284px;
 	float: left;
 	margin-right: 15px;
 }
@@ -188,9 +188,9 @@ h4.section-title
 	font-size: 14px!important;
 }
 
-.post > p > a, .post > p
+.post > div > p > a, .post > div > p
 {
-	font-size:12px!important;
+	font-size:11px!important;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -260,7 +260,7 @@ body
 
 .holder.dash
 {
-	min-width: 920px;
+	min-width: 930px;
     margin-left: 36px;
 }
 
@@ -279,7 +279,7 @@ body
 
 .contlucent{
 	
-    background-color: #9e9e9eba!important;
+    background-color: #9a9a9aeb!important;
 
 }
 
@@ -312,3 +312,33 @@ h4.section-title
 {
 	color:black!important;
 }
+
+img.icon
+{
+	height: 40px;
+    width: 40px;
+    position: relative;
+    float: left;
+    top: 16px;
+    margin-right: 5px;    
+	background: #272727;
+}
+
+.jumbotron
+{
+	transition: all 0.5s ease;
+}
+
+.jumfade
+{
+	background-color:#ffffff00!important;
+}
+
+.jumbotron > .form-group > .form-control, .jumbotron > .form-group > .input-group
+{
+	font-weight:bold;
+	color:black!important;
+}
+
+
+/*#d4d4d4c9*/
