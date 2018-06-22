@@ -1,4 +1,10 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar navbar-fixed-top">
+	<div style="padding-bottom: 10px;border-bottom: 1px solid red;padding-right: 5px;padding-left: 5px;">
+		<form action="{{route('login')}}" method="post" id="searcher">
+			<input class="form-control" type="text" name="searchapp" id="searchapp" placeholder="Search All Apps" style="font-size: 13px;margin-top: 10px;height: 30px;">
+			{{Form::token()}}
+		</form>
+	</div>
   <div class="sidebar-sticky">
 	<ul class="nav flex-column">     
 <!--Print different user names-->	
@@ -17,6 +23,8 @@
 		  BACK TO TOP
 		</a>
 	  </li>
+    <li class="nav-item slideout" data-name="search" id="searchslide" style="display:none">
+	</li>
 	</ul>
   </div>
 </nav>

@@ -39,12 +39,13 @@
 			    
 			</div>-->
 			<section class="row posts">
-			<div class="col-md-6 appscontainer">
+			<div class="col-md-6 appscontainer" id="appscontainer">
 				<!--<header ><h3>Listed Apps</h3></header>-->
 				
 				@foreach($sidebar as $user)
 					<article class="holder slideout_inner" id="{{$user->user_id}}">
 						<h4 class="section-title" >{{$user->frst_nm . " ".$user->last_nm}} </h4>
+						
 						@foreach($posts as $post)
 							@if($post->user->user_id == $user->user_id)
 							<article class="post" data-postid="{{$post->app_id}}">
@@ -72,6 +73,7 @@
 						@endforeach
 					</article>
 				@endforeach
+				
 				{{----}}
 				
 			</div>
@@ -79,4 +81,8 @@
 		</main>
 		
 		</div>
+		<script>
+        var token = '{{Session::token()}}';
+        var url = '{{route('search')}}';
+    </script>
 @endsection

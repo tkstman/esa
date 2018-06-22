@@ -521,7 +521,65 @@ $(window).on('scroll', lumfader
 );
 
 
+//HANDLER FOR KEY UP EVENT IN TEXT SEARCH FIELD
+var timer;
+function up(ev)
+{
+	timer= setTimeout(function()
+	{
+		if(ev.keyCode ==27)
+		{
+			$('#searchapp').val("");
+		}
+		var keywords = $.trim($('#searchapp').val());
+		$("#search").remove();								//REMOVE THE OLD SEARCH RESULT FROM HTML
+		if(keywords.length >0 && keywords.match(/^[a-zA-Z0-9 ]+/))
+		{
+			console.log('inner');
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			
+			var datam = new FormData($('#searcher'));
+			datam.append('searchvalue', keywords);
+			datam.append('_token', token);
+			
+			$.ajax({
+			type: 'POST',
+			url: url,
+			data :datam,
+			processData: false,
+			contentType: false,
+			dataType: 'json'
+			
+			}).done(function (msg) {
+				$('#appscontainer').append(msg.html);
+				
+				//get the currently selected slideout and have it slide away from view
+				
+				//slideout the search container and add active to it
+				$("#searchslide").trigger("click");
+			});
+		}
+	},500);
+}
 
+function down()
+{
+	clearTimeout(timer);
+}
+
+
+$('#searchapp').keyup( function(ev) {
+	up(ev);
+});
+
+
+$('#searchapp').keydown( function() {
+	down();
+});
 
 
 // The function actually applying the offset
@@ -561,6 +619,7 @@ $(document).ready(function(){
 		}
 	});
 });
+
 
 
 

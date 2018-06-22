@@ -372,7 +372,29 @@ class PostController extends Controller
         }
         catch(\Throwable $e)
         {
-            return response()->json(['message' => "Unexpected Error Thrown" . $e->getMessage() ." ". $e->getLine() ." ". $e->getFile(), 'errstatus'=>0], 200); //
+            return response()->json(['message' => "Unexpected Error Thrown" , 'errstatus'=>0], 200); //. $e->getMessage() ." ". $e->getLine() ." ". $e->getFile()
         }
     }
+	
+	public function postPostSearch(Request $request)
+	{
+		try
+        {
+            $this->validate($request, [
+                'searchvalue' =>'required',
+            ]);
+			
+			$results = Post::where('app_nm', 'like', '%'. $request['searchvalue'] .'%')->get();
+			
+			$html = view('includes.searchresults',['posts'=>$results])->render();
+			
+			return response()->json(['success' => true, 'html' => $html]);
+
+            //$state = 'Successfully Updated Post!';
+		}
+		catch(\Throwable $e)
+		{
+			return response()->json(['message' => "Unexpected Error Thrown" . $e->getMessage() ." ". $e->getLine() ." ". $e->getFile(), 'errstatus'=>0], 200); //
+		}
+	}
 }

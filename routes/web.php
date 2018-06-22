@@ -66,6 +66,11 @@ Route::group(['middleware'=>['web']], function () {
         $valll= $request->hasFile('edit_readmes');//->hashName();
         return response()->json(['message' => $valll]);*/
     );
+	
+	Route::post('/search', [
+		'uses' => 'PostController@postPostSearch',
+		'as' => 'search'
+	]);
     
     Route::get('/account', [
         'uses'=> 'UserController@getAccount',
