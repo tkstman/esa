@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     public $main = 'uploads/';
-	public $allowedMimeTypes =  ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+	public $allowedMimeTypes =  ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml','image/x-icon'];
 	public $php_logo= 'uploads/noimageicon.png';
     //
     public function postCreatePost(Request $request)
@@ -323,8 +323,7 @@ class PostController extends Controller
 			
 			if($request->has('edit_appicons') )
             {
-				//$contentType = ;				
-				
+	
                 if($request->hasFile('edit_appicons') && $request->file('edit_appicons')->isValid() && in_array(mime_content_type($request->file('edit_appicons')->getPathName()), $this->allowedMimeTypes))
                 {
                     if( file_exists($post->app_icon_path) )
@@ -347,7 +346,7 @@ class PostController extends Controller
                     
                 }     
                 else if(preg_match($validation, trim($request['edit_appicons'])) && in_array( get_headers($request['edit_appicons'],1)['Content-Type'] , $this->allowedMimeTypes) && trim($request['edit_appicons']) !==$post->app_icon_path  )
-                {
+                {	
                     $post->app_icon_path =trim($request['edit_appicons']);
                     $change=true;
                 }
