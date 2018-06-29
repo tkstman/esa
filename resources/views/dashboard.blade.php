@@ -2,7 +2,7 @@
 
 @section('content')
    @include('includes.message-block')
-    <section class="row new-post">
+    <div class="row new-post">
         <div class="col-md-6">
             <header>
                 <h3>Uploading a new application?</h3>
@@ -31,19 +31,19 @@
                 </div>
             </form>-->
         </div>
-    </section>
-    <section class="row posts">
+    </div>
+    <div class="row posts">
         <div class="col-md-6 holder dash">
             <header><h3>Listed Apps</h3></header>
             @foreach($posts as $post)
-            <article class="post" data-postid="{{$post->app_id}}">
+            <div class="post" data-postid="{{$post->app_id}}">
 				<div>
 					<img class="icon" src="{{$post->isSet($post->app_icon_path) ? $post->app_icon_path : 'uploads/noimageicon.png' }}" alt="Image" data-title="{{$post->isSet($post->app_icon_path) ? 'set' : 'default' }}"/>
 				</div>
 				<div>
-					<p> {{strtoupper($post->app_nm)}}        
+					<p class="title"> {{strtoupper($post->app_nm)}}        
 					</p>
-					<p><a class="btn btn-info btn-sm" href="{{$post->app_path}}" data-title="appfile" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">App</a> |
+					<p class="downloadables"><a class="btn btn-info btn-sm" href="{{$post->app_path}}" data-title="appfile" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">App</a> |
 					  @if($post->isSet($post->app_manual_path))
 					   <a class="btn btn-info btn-sm" href="{{$post->app_manual_path}}" data-title="manual" {{$post->isUrl($post->app_manual_path) ? 'target="_blank"' : 'download'}}  data-name="{{$post->app_manual_path}}">Manual</a> |
 					   @endif  
@@ -64,18 +64,18 @@
                        <a href="{{route('post.delete',['post_id'=>$post->app_id])}}">Delete</a>
                    @endif
                 </div>
-            </article>
+            </div>
             @endforeach
             
         </div>
-    </section>
+    </div>
     
     <div class="modal" tabindex="-1" role="dialog" id='edit-modal'>
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content contlucent">
           <div class="modal-header">
             <h5 class="modal-title lucent">Edit Application</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeedit">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -168,7 +168,7 @@
         <div class="modal-content contlucent">
           <div class="modal-header">
             <h5 class="modal-title lucent">New Application</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeadd">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -176,6 +176,9 @@
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
                <div class="jumbotron lucent">               
                     <div class="form-group">
+						<!--[if lt IE 9]>
+							<label for="app_name">Application Name</label>				
+						<![endif]-->
                        <div class="input-group mb-3">
                            <input class="form-control" name="app_name" id="app_name" rows="1" placeholder="Application Name" type="text"/>
                            <div class="input-group-append" >|

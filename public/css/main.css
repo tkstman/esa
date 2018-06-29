@@ -15,7 +15,8 @@
     border-left: 3px solid #a21b24;
     margin-bottom: 10px;
 	padding-right: 10px;
-	background-color: #ffffff69;
+	background-color: rgb(255,255,255);
+	background-color: rgba(255, 255, 255, 0.42);
 	width:284px;
 	float: left;
 	margin-right: 15px;
@@ -31,7 +32,7 @@
 	float:left;
 	padding-right: 10px;
 	width: 920px;
-	background-color: rgba(90, 71, 71, 0.38);
+	background-color: rgb(169, 147, 147);
 }
 
 .section-title
@@ -50,7 +51,7 @@
 {
     border:1px solid red;
     background-color:#f9b5af;
-    color:red;
+    color:red!important;
 }
 
 
@@ -65,7 +66,7 @@
 {
     border:1px solid green;
     background-color: #d1f9da;
-    color:green;
+    color:green!important;
 }
 
 .custom-file-upload-hidden {
@@ -173,7 +174,7 @@
 }
 
 #top{
-	background-color: #170000c9;
+	background-color: rgb(23,0,0);
     border-left: 3px solid blue;
     border-bottom: 4px solid #a21b24;
 }
@@ -188,10 +189,30 @@ h4.section-title
 	font-size: 14px!important;
 }
 
-.post > div > p > a, .post > div > p
+.post > div > p.title
 {
 	font-size:11px!important;
-	overflow: hidden;
+	overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	color: black;
+	font-weight: bold;
+}
+
+.post > div > p.downloadables
+{
+	font-size:11px!important;
+	overflow: visible; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	color: black;
+	font-weight: bold;
+}
+
+.post > div > p > a
+{
+	font-size:11px!important;
+	overflow: visible!important;
     text-overflow: ellipsis;
     white-space: nowrap;
 	color: black;
@@ -202,7 +223,8 @@ h4.section-title
 body
 {
     background-color: #a5a5a5;
-    background: linear-gradient(-90deg,  #bdbdbd, #ce9090);
+	background: rgba(253, 144, 193, 0.55)!important;
+    background: linear-gradient(-90deg,  #bdbdbd, #ce9090)!important;
 }
 
 
@@ -213,7 +235,8 @@ body
 
 .navbar-fixed-top
 {
-	background-color: #928d8d6b!important;
+	background-color: rgb(108, 108, 108) !important;
+	background-color: rgba(145, 141, 141, 0.59)!important;		
 }
 
 
@@ -250,7 +273,8 @@ body
 
 .navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top
 {
-	background-color: #0000002b!important;
+	background-color: rgb(145, 141, 141)!important;
+	background-color: rgba(145, 141, 141, 0.59)!important;	
 }
 
 .navbar-nav.navbar-right
@@ -300,6 +324,8 @@ body
 }
 
 .jumbotron.login{
+	background-color: rgb(78,78,78);
+	background-color:rgba(79, 79, 79, 0.21);
 	background-color: #4e4e4e36;
 }
 

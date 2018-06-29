@@ -1,0 +1,177 @@
+body{
+	background-color: pink!important;
+}
+
+body > .container
+{
+	margin-top:55px;
+}
+
+#navbarSupportedContent
+{
+	width:80%!important;
+	height:50px!important;
+	display:inline-block!important;
+}
+
+.navbar-fixed-top.bg-light.navbar-light.navbar-expand-lg.navbar
+{
+	background-color: rgb(108, 108, 108)!important;
+}
+
+.navbar-nav{
+	display:inline-block!important;
+}
+
+.navbar-nav.navbar-right
+{
+	float:right;
+}
+
+/* .navbar-fixed-top.bg-light.navbar-light.navbar-expand-lg.navbar > .navbar-brand */
+/* { */
+	/* margin-top:4px; */
+/* } */
+
+/* .jumbotron.login{ */
+    /* margin-left: 10% !important; */
+    /* margin-right: 10% !important; */
+/* } */
+
+
+/* .col-md-6 */
+/* { */
+	/* width:auto!important; */
+/* } */
+
+/* .row.login > .col-md-6.mx-auto */
+/* {	 */
+    /* margin-left: 20% !important; */
+    /* margin-right: 20% !important; */
+
+/* } */
+
+/* .row.login > .col-md-6.mx-auto > h3 */
+/* {	 */
+    /* margin-left: 10% !important; */
+    
+/* } */
+
+.navbar-nav > .nav-item {
+    float: left !important;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.navbar-fixed-top.sidebar.bg-light.d-md-block.d-none.col-md-2
+{
+	display:block!important;
+}
+#top{
+	margin-top:6px;
+	margin-left:210px !important;
+}
+
+#appscontainer
+{
+    margin-left: 246px !important;
+}
+
+
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  
+   
+    outline:0;
+    font-size:100%;
+
+    background:transparent;
+}
+
+body {
+ 
+}
+
+#navbarSupportedContent > .navbar-nav > .nav-item > .nav-link,.navbar-brand
+{
+	color:rgb(195, 203, 224)!important;
+}
+
+
+#navbarSupportedContent > .navbar-nav >  .nav-item > .nav-link:focus, .nav-item > .navbar-brand:focus
+{
+	color:rgb(137, 158, 211)!important;
+}
+
+#navbarSupportedContent > .navbar-nav > .nav-item > .nav-link:hover, .nav-item > .navbar-brand:hover
+{
+	color:rgb(93, 119, 186)!important;
+}
+
+.col-md-6 > h3
+{
+	margin-left:20px;
+}
+
+.jumbotron > .form-group > .form-control, .jumbotron > .form-group > .input-group
+{
+	font-weight:bold;
+	color:black!important;
+}
+
+#uploaders >.jumbotron.lucent >.form-group >.input-group.mb-3 >.form-control.dummy
+{
+	width: 77%!important;
+}
+
+#uploaders >.jumbotron.lucent >.form-group >.input-group.mb-3 > .input-group-append > .input-group-append
+{
+	display:inline !important;
+}
+
+#uploaders >.jumbotron.lucent >.form-group >.input-group.mb-3 > .input-group-append > .input-group-append > .input-group-text
+{
+	display:inline !important;
+	padding:5px!important;
+	margin-left:8px!important;
+}
+
+.contlucent {
+    background-color: rgb(154, 154, 154) !important;
+}
+
+.jumbotron.lucent >.form-group >.input-group.mb-3 > .form-control
+{
+	width:80%;
+} 
+
+.jumbotron.lucent >.form-group >.input-group.mb-3 >.input-group-append
+{
+	text-align:center;
+}
+
+
+.jumbotron.lucent >.form-group >.input-group.mb-3 >.input-group-append > .input-group-text
+{
+	display:inline-block!important;
+	font-size:13px!important;
+	padding-left:0px!important;
+}
+

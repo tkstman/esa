@@ -5,7 +5,7 @@
 @section('content')
    @include('includes.message-block')
     <section class="row new-post">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md">
             <header><h3>Administration</h3></header>
             <button type="button" class="btn btn-primary btn-lg" id="addNew">Add App For Another User</button>
         </div>    
@@ -15,7 +15,7 @@
         <div class="modal-content contlucent">
           <div class="modal-header">
             <h5 class="modal-title lucent">New Application</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeadd">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -23,7 +23,10 @@
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
                <div class="jumbotron lucent add_for">               
                     <div class="form-group">
-                       <div class="input-group mb-3">
+						<!--[if lt IE 9]>
+							<label for="app_name">Application Name</label>				
+						<![endif]-->
+					   <div class="input-group mb-3">
                            <input class="form-control" name="app_name" id="app_name" rows="1" placeholder="Application Name" type="text"/>
                            <div class="input-group-append" >|
                                 <div class="input-group-text" style="padding-left: 12%">

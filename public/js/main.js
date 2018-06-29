@@ -31,6 +31,8 @@ function clearEditFields()
     $('#edit_file').val('');
     $('#edit_manual').val('');
     $('#edit_readme').val('');
+	$('#edit_appicon').val('');
+    $('#edit_appicon').attr('data-text','');
     $('#edit_name').attr('data-text','');
     $('#edit_file').attr('data-text','');
     $('#edit_manual').attr('data-text','');
@@ -56,7 +58,7 @@ function clearEditFields()
 /**
 Load Info Into Edit Modal
 **/
-$('.post').find('.interaction').find('.edit').on('click', function (event) {
+$('.edit').on('click', function (event) {
     event.preventDefault();
     clearEditFields();
     
@@ -355,14 +357,15 @@ $('#modal-save').on('click', function () {
         //console.log('hi');
         //console.log($(postBodyElement));
         var resp = JSON.parse(JSON.stringify(msg));//JSON.parse(msg);
-        console.log(JSON.stringify(msg));
-		console.log(resp);
+        //console.log(JSON.stringify(msg));
+		//console.log(resp);
         
         if(resp.errstatus==0)
         {
             //console.log($(postBodyElement.childNodes[3].childNodes[4]));
             $('#modal-save').prop('disabled',false);
             $('.myerror').text(resp.message);
+			$('.myerror').addClass('error');
         }
         else{        
             //assigning when json is returned
@@ -444,16 +447,19 @@ $('#modal-save').on('click', function () {
            
 		   
            $('#modal-save').prop('disabled',false);
-           $('#edit-modal').modal('hide');
+           //$('#edit-modal').modal('hide');
+		   $('.myerror').text(resp.message);
+		   $('.myerror').addClass('success');
         }
     });
     
 });
 
 
-$('#uploaders').on('click', function() {
+$('.modal-content.contlucent').on('click', function() {
     $('.myerror').text("");
     $('.myerror').removeClass("error");
+	$('.myerror').removeClass("success");
 });
 
 //Update value displayed in drop downdown menu
@@ -535,7 +541,6 @@ function up(ev)
 		$("#search").remove();								//REMOVE THE OLD SEARCH RESULT FROM HTML
 		if(keywords.length >0 && keywords.match(/^[a-zA-Z0-9 ]+/))
 		{
-			console.log('inner');
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -543,7 +548,7 @@ function up(ev)
 			});
 			
 			var datam = new FormData($('#searcher'));
-			datam.append('searchvalue', keywords);
+			datam.append('searchapp', keywords);
 			datam.append('_token', token);
 			
 			$.ajax({

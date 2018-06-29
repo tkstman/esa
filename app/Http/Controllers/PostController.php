@@ -378,12 +378,12 @@ class PostController extends Controller
 	public function postPostSearch(Request $request)
 	{
 		try
-        {
+        {			
             $this->validate($request, [
-                'searchvalue' =>'required',
+                'searchapp' =>'required',
             ]);
 			
-			$results = Post::where('app_nm', 'like', '%'. $request['searchvalue'] .'%')->get();
+			$results = Post::where('app_nm', 'like', '%'. $request['searchapp'] .'%')->get();
 			
 			$html = view('includes.searchresults',['posts'=>$results])->render();
 			
