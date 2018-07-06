@@ -23,7 +23,7 @@
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
                <div class="jumbotron lucent add_for">               
                     <div class="form-group">
-						<!--[if lt IE 9]>
+						<!--[if lte IE 9]>
 							<label for="app_name">Application Name</label>				
 						<![endif]-->
 					   <div class="input-group mb-3">

@@ -9,11 +9,47 @@ $(document).ready( function()
 	}
 	
 	if(typeof $('.edit') != 'undefined'){
-		console.log("edits");
 		$('.edit').unbind('click');		
+		$('.checkbox').unbind('click');	
 		$('.edit').click( function(){
 			$('#edit-modal').addClass('show');
 		});	
+		
+		$('.checkbox').on('click', function (event) {
+			if(this.checked)
+			{
+				console.log(this.parentNode.parentNode.parentNode.childNodes[2]);
+				//change the edit fields source input type to text and set a placeholder to accept url for the ADD Modal
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).addClass('hide'); 
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).removeClass('hide'); 
+				
+				//swap names
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('name',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name') ); //set input name for link input 
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name',$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('id') ); //set the input name for file input
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('id',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('id') ); //set input id for link input 
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('id',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name') );//set the input id for file input
+				console.log(this.parentNode.parentNode.parentNode.childNodes[2]);
+				//this.parentNode.parentNode.parentNode.childNodes[0].placeholder = 'Enter Url | http://intranet';
+			}
+			else
+			{
+				//change the edit fields source input text to file  for the ADD Modal
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).removeClass('hide'); 
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).addClass('hide'); 
+				
+				//swap names
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('name',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name') ); //set input name for link input 
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name',$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('id') ); //set the input name for file input
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[2]).attr('id',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('id') ); //set input id for link input 
+				
+				$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('id',$(this.parentNode.parentNode.parentNode.childNodes[0]).attr('name') );//set the input id for file input
+			}
+		});
 	}
 	
 	if(typeof $('#closeadd') != 'undefined'){
@@ -143,3 +179,7 @@ function up(ev)
 // $('#searchapp').on('keydown', function() {
 	// down();
 // });
+
+
+
+

@@ -611,9 +611,6 @@ $(document).ready(function(){
 
 	    var target = this.hash;
 	    var $target = $(target);
-		// console.log(target);
-		// console.log($target);
-		// console.log($target.offset());
 		if(typeof $target.offset() != "undefined")
 		{
 			$('html, body').stop().animate({

@@ -7,29 +7,7 @@
             <header>
                 <h3>Uploading a new application?</h3>
             </header>
-            <button type="button" class="btn btn-primary btn-lg" id="addNew">Add New App</button>
-            <!--<form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
-               <div class="jumbotron">               
-                    <div class="form-group">
-                        <textarea class="form-control" name="app_name" id="app_name" rows="1" placeholder="Application Name"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="app_file">Application File</label>
-                        <input class="form-control" type="file" name="app_file" id="app_file"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="app_manual">Manual</label>
-                        <input class="form-control" type="file" name="app_manual" id="app_manual"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="app_readme">Read me</label>
-                        <input class="form-control" type="file" name="app_readme" id="app_readme"/>
-                    </div>
-                    <button type="submit" class="btn-primary">Post New App</button>
-                    {{Form::token()}}
-                </div>
-            </form>-->
+            <button type="button" class="btn btn-primary btn-lg" id="addNew">Add New App</button>            
         </div>
     </div>
     <div class="row posts">
@@ -41,7 +19,7 @@
 					<img class="icon" src="{{$post->isSet($post->app_icon_path) ? $post->app_icon_path : 'uploads/noimageicon.png' }}" alt="Image" data-title="{{$post->isSet($post->app_icon_path) ? 'set' : 'default' }}"/>
 				</div>
 				<div>
-					<p class="title"> {{strtoupper($post->app_nm)}}        
+					<p class="title" title="{{strtoupper($post->app_nm)}}"> {{strtoupper($post->app_nm)}}        
 					</p>
 					<p class="downloadables"><a class="btn btn-info btn-sm" href="{{$post->app_path}}" data-title="appfile" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">App</a> |
 					  @if($post->isSet($post->app_manual_path))
@@ -56,8 +34,6 @@
 					</div>
 				</div>
                 <div class="interaction">
-                   <!--<a href="#">Like</a> |
-                   <a href="#">DisLike</a>--> 
                    @if(Auth::user()->user_id==$post->user->user_id || Auth::user()->isAdmin())
                        |
                        <a href="#" class="edit">Edit</a> |
@@ -176,7 +152,7 @@
             <form action="{{route('post.create')}}" enctype="multipart/form-data" method="post">
                <div class="jumbotron lucent">               
                     <div class="form-group">
-						<!--[if lt IE 9]>
+						<!--[if lte IE 9]>
 							<label for="app_name">Application Name</label>				
 						<![endif]-->
                        <div class="input-group mb-3">
@@ -193,9 +169,13 @@
                         <label for="app_file">Application File</label>
                         <div class="input-group mb-3">
                            <input class="form-control" type="file" name="app_file" id="app_file"/>
+						   <!--[if lte IE 9]>
+								<input class="form-control hide" type="text" name="app_file_link" id="app_file_link" title="Enter Url | http://intranet"/>				
+						   <![endif]-->
                             <div class="input-group-append">|
                                 <div class="input-group-text">
                                   <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">
+								  
                                 </div>
                             </div>                            
                         </div>
@@ -205,6 +185,9 @@
                       <label for="app_manual">Manual</label>
                        <div class="input-group mb-3">                            
                             <input class="form-control" type="file" name="app_manual" id="app_manual"/>
+							<!--[if lte IE 9]>
+								<input class="form-control hide" type="text" name="app_manual_link" id="app_manual_link" title="Enter Url | http://intranet"/>				
+						   <![endif]-->
                             <div class="input-group-append">|
                                 <div class="input-group-text">
                                   <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">
@@ -216,6 +199,9 @@
                         <label for="app_readme">Read me</label>
                         <div class="input-group mb-3">   
                             <input class="form-control" type="file" name="app_readme" id="app_readme"/>
+							<!--[if lte IE 9]>
+								<input class="form-control hide" type="text" name="app_readme_link" id="app_readme_link" title="Enter Url | http://intranet"/>				
+						   <![endif]-->
                             <div class="input-group-append"> |
                                 <div class="input-group-text">
                                   <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">
@@ -227,6 +213,9 @@
                         <label for="app_appicon">App Icon</label>
                         <div class="input-group mb-3">   
                             <input class="form-control" type="file" name="app_appicon" id="app_appicon"/>
+							<!--[if lte IE 9]>
+								<input class="form-control hide" type="text" name="app_appicon_link" id="app_appicon_link" title="Enter Url | http://intranet"/>				
+						   <![endif]-->
                             <div class="input-group-append"> |
                                 <div class="input-group-text">
                                   <input class="checkbox add" type="checkbox" aria-label="checkbox_app_file">

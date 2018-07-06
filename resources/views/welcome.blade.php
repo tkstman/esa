@@ -22,22 +22,6 @@
 					</p>
 				</div>
 			</div>
-			<!--<div >
-			    <header>Header</header>
-				<div class="slideout">
-				   <p>Page Content</p>
-
-			    </div>
-			    <nav id="slideout_inner">
-				   <ul>
-					 <li><a href="#">Menu Item</a></li>
-					 <li><a href="#">Menu Item</a></li>
-					 <li><a href="#">Menu Item</a></li>
-					 <li><a href="#">Menu Item</a></li>
-				  </ul>
-			    </nav>
-			    
-			</div>-->
 			<div class="row posts">
 			<div class="col-md-6 appscontainer" id="appscontainer">
 				<!--<header ><h3>Listed Apps</h3></header>-->
