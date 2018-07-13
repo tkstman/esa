@@ -54,7 +54,7 @@ body > .container
 /* .row.login > .col-md-6.mx-auto > h3 */
 /* {	 */
     /* margin-left: 10% !important; */
-    
+
 /* } */
 
 .navbar-nav > .nav-item {
@@ -67,6 +67,7 @@ body > .container
 .navbar-fixed-top.sidebar.bg-light.d-md-block.d-none.col-md-2
 {
 	display:block!important;
+	overflow-y: scroll;
 }
 #top{
 	margin-top:6px;
@@ -82,7 +83,7 @@ body > .container
 
 
 article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { 
+footer,header,hgroup,menu,nav,section {
     display:block;
 }
 
@@ -95,11 +96,11 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
-  
-   
+
+
     outline:0;
     font-size:100%;
 
@@ -107,7 +108,7 @@ time, mark, audio, video {
 }
 
 body {
- 
+
 }
 
 #navbarSupportedContent > .navbar-nav > .nav-item > .nav-link,.navbar-brand
@@ -161,7 +162,7 @@ body {
 .jumbotron.lucent >.form-group >.input-group.mb-3 > .form-control
 {
 	width:80%;
-} 
+}
 
 .jumbotron.lucent >.form-group >.input-group.mb-3 >.input-group-append
 {
@@ -176,3 +177,18 @@ body {
 	padding-left:0px!important;
 }
 
+
+.posts .post
+{
+	width:224px!important;
+}
+
+.post > DIV > P.downloadables
+{
+	font-size: 9px!important;
+}
+
+.btn-sm.btn-info.btn
+{
+	padding:0!important;
+}

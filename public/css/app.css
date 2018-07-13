@@ -8353,7 +8353,7 @@ button.close {
 .col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4,
 .col-md-2.d-none.d-md-block.bg-light.sidebar.navbar-fixed-top {
   margin-top: 61px;
-  min-width: 237px;
+  min-width: 200px;
 }
 
 .btn.btn-info.btn-sm,
@@ -8386,4 +8386,3 @@ button.close {
 .input-group {
   display: -webkit-inline-box;
 }
-
