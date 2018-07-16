@@ -70,22 +70,22 @@
         var url = '{{route('search')}}';
 
         if(window.screen.availWidth<"1152")
-+        {
-+          var jumbotron = document.getElementById("top");
-+          jumbotron.style.width="760px";
-+
-+          var holder = document.querySelectorAll(".holder.slideout_inner");
-+          for(var t=0;t<holder.length;t++)
-+          {
-+            holder[t].style.width="760px";
-+          }
-+        }
-+        if(window.screen.availHeight<"920")
-+        {
-+          var nav = document.getElementById("sidebar");
-+          nav.style.overflowY="scroll";
-+          nav.style.bottom="0px";
-+        }
+        {
+          var jumbotron = document.getElementById("top");
+          jumbotron.style.width="760px";
+
+          var holder = document.querySelectorAll(".holder.slideout_inner");
+          for(var t=0;t<holder.length;t++)
+          {
+            holder[t].style.width="760px";
+          }
+        }
+        if(window.screen.availHeight<"920")
+        {
+          var nav = document.getElementById("sidebar");
+          nav.style.overflowY="scroll";
+          nav.style.bottom="0px";
+        }
 
     </script>
 @endsection
