@@ -12,7 +12,6 @@
 			@include('includes.message-block')
 			<div class="jumbotron mx-auto" id="top">
 				<div class="container">
-					<h1>Welcome To Our Site</h1>
 					<p class="lead">
 						Welcome to the Electoral Office Software Hub Application.
 					</p>
@@ -49,9 +48,9 @@
 										@endif
 									</p>
 								</div>
-								<!--<div class="info">
+								<div class="info">
 									Posted on {{$post->created_dt}}
-								</div>	-->
+								</div>
 							</div>
 							@endif
 						@endforeach

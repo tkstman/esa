@@ -32,7 +32,7 @@
 	float:left;
 	padding-right: 10px;
 	width: 920px;
-	background-color: rgb(169, 147, 147);
+	background-color: rgb(147, 157, 169);/*rgb(169, 147, 147);*/
 }
 
 .section-title
@@ -174,9 +174,11 @@
 }
 
 #top{
-	background-color: rgb(23,0,0);
+	background-color: rgb(206, 206, 206); /*rgb(23,0,0)*/
     border-left: 3px solid blue;
     border-bottom: 4px solid #a21b24;
+    color: red;
+    padding-bottom: 0px;
 }
 
 .col-md-2.d-none.d-md-block.bg-light.sidebar.navbar-fixed-top
@@ -222,9 +224,9 @@ h4.section-title
 
 body
 {
-    background-color: #a5a5a5;
-	background: rgba(253, 144, 193, 0.55)!important;
-    background: linear-gradient(-90deg,  #bdbdbd, #ce9090)!important;
+    background-color: #a1acbf!important /*#a5a5a5!important;*/
+	background: rgba(144, 162, 204, 0.55)!important; /*rgba(253, 144, 193, 0.55)!important;*/
+    background: linear-gradient(-90deg,  #bdbdbd, #a0c9ec)!important; /*#ce9090*/
 }
 
 
