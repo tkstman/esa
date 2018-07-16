@@ -61,11 +61,11 @@ Load Info Into Edit Modal
 $('.edit').on('click', function (event) {
     event.preventDefault();
     clearEditFields();
-    
+
     /*
     Need to check if values being supplied to Modal are url and have Modal updated accordingly
     */
-    
+
     //Get App Name
     postBodyElement =event.target.parentNode.parentNode; //Posted Article Element
     //console.log(postBodyElement);
@@ -76,7 +76,7 @@ $('.edit').on('click', function (event) {
 	//console.log(event.target.parentNode.parentNode);
     $('#edit_name').val(postName); //Set the Edit Modals Name Field To posted App Name from html
     $('#edit_name').attr('data-text',postName);
-    
+
     //Get App File
     if(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[0]) //Check if the App Exe file Link exists in the htmlw
     {
@@ -89,8 +89,8 @@ $('.edit').on('click', function (event) {
         {
             //issue check box click event for current Input field section on edit modal
             document.getElementById('edit_files').parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1].click();
-            
-            
+
+
        // console.log(document.getElementById('edit_files').parentNode.childNodes[5].childNodes[3].childNodes[3].childNodes[1]);
             //Set Actually Input Field To data attibute value
             $('#edit_files').val(postFile);
@@ -102,11 +102,11 @@ $('.edit').on('click', function (event) {
             postFile = postFile.substr(postFile.indexOf("/") + 1, postFile.length - 1);
             $('#edit_file').val(postFile);
             $('#edit_file').attr('data-text',postFile);
-        }        
-        
+        }
+
     }
-    
-    
+
+
     //Get App Manual
     //console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2]);
     if(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2] && event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2].dataset.title=="manual") //Check if the Manual file Link exists in the htmlw
@@ -114,15 +114,15 @@ $('.edit').on('click', function (event) {
         //Get the data-name element value and assign the it to the edit modal's Manual text dummy field
         //
         var postMan = event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2].getAttribute('data-name');
-       
-        
+
+
         //console.log(postMan);
         //if the value is a link
         if(isUrlJs(postMan))
         {
             //issue check box click event for current Input field section on edit modal
             document.getElementById('edit_manuals').parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1].click();
-            
+
             //Set Actually Input Field To data attibute value
             $('#edit_manuals').val(postMan);
             $('#edit_manuals').attr('data-text',postMan);
@@ -132,26 +132,26 @@ $('.edit').on('click', function (event) {
             postMan = postMan.substr(postMan.indexOf("/") + 1, postMan.length - 1);
             $('#edit_manual').val(postMan);
             $('#edit_manual').attr('data-text',postMan);
-        }    
+        }
     }
-    
-    
+
+
     //Get App Readme
 	//console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4]);
     var postyr = event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4] ? event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4] : event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[2];
-                       
+
 
     if( postyr && postyr.dataset.title =="readme")
     {
-        //Get the data-name element value and assign the it to the edit modal's Readme text dummy field Link 
+        //Get the data-name element value and assign the it to the edit modal's Readme text dummy field Link
         var postRead = postyr.getAttribute('data-name');
         //if the value is a link
         if(isUrlJs(postRead))
         {
             //issue check box click event for current Input field section on edit modal
             document.getElementById('edit_readmes').parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1].click();
-            
-            
+
+
             //Set Actually Input Field To data attibute value
             $('#edit_readmes').val(postRead);
             $('#edit_readmes').attr('data-text',postRead);
@@ -163,8 +163,8 @@ $('.edit').on('click', function (event) {
             $('#edit_readme').attr('data-text',postRead);
         }
     }
-	
-	
+
+
 	//Get App Icon
 	//console.log(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[4]);
     var iconyr = event.target.parentNode.parentNode.childNodes[1].childNodes[1] ? event.target.parentNode.parentNode.childNodes[1].childNodes[1] : event.target.parentNode.parentNode.childNodes[1].childNodes[1];
@@ -172,15 +172,15 @@ $('.edit').on('click', function (event) {
 
     if( iconyr && iconyr.dataset.title =="set")
     {
-        //Get the src attribute value and assign the it to the edit modal's icon text dummy field Link 
+        //Get the src attribute value and assign the it to the edit modal's icon text dummy field Link
         var postRead = iconyr.getAttribute('src');
         //if the value is a link
         if(isUrlJs(postRead))
         {
             //issue check box click event for current Input field section on edit modal
             document.getElementById('edit_appicons').parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1].click();
-            
-            
+
+
             //Set Actually Input Field To data attibute value
             $('#edit_appicons').val(postRead);
             $('#edit_appicons').attr('data-text',postRead);
@@ -192,23 +192,23 @@ $('.edit').on('click', function (event) {
             $('#edit_appicon').attr('data-text',postRead);
         }
     }
-	
-	
-	
-	
+
+
+
+
     //Get App All
-    
+
     //Re enable the save edit button and show the modal
     $('#modal-save').prop('disabled',false);
     $('#edit-modal').modal();
-    
+
 });
 
 $('.checkbox').on('click', function (event) {
     if(this.checked)
     {
         //change the edit fields source input type to text and set a placeholder to accept url for the ADD Modal
-        this.parentNode.parentNode.parentNode.childNodes[1].type = 'text'; 
+        this.parentNode.parentNode.parentNode.childNodes[1].type = 'text';
         this.parentNode.parentNode.parentNode.childNodes[1].placeholder = 'Enter Url | http://intranet';
     }
     else
@@ -228,14 +228,14 @@ $('.editcheckbox').on('click', function (event) {
         this.parentNode.parentNode.parentNode.parentNode.childNodes[1].value = this.parentNode.parentNode.parentNode.parentNode.childNodes[1].dataset.text;
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[1]).removeClass('success');
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[1]).removeClass('error');
-        
+
         //file upload select input
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[3]).addClass('custom-file-upload-hidden');
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[3]).removeClass('success');
-        
+
         //file upload dummy button input
         $(this.parentNode.parentNode.parentNode.childNodes[1]).addClass('custom-file-upload-hidden');
-        
+
     }
     else
     {
@@ -243,16 +243,16 @@ $('.editcheckbox').on('click', function (event) {
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[1]).addClass('custom-file-upload-hidden');
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[1]).removeClass('form-control');
         this.parentNode.parentNode.parentNode.parentNode.childNodes[1].type="file";
-        
+
         //file upload dummy field
         $(this.parentNode.parentNode.parentNode.parentNode.childNodes[3]).removeClass('custom-file-upload-hidden');
         //$(this.parentNode.parentNode.parentNode.parentNode.childNodes[3]).val($(this.parentNode.parentNode.parentNode.parentNode.childNodes[3]).data('text'));
-        
+
         //file upload button
         $(this.parentNode.parentNode.parentNode.childNodes[1]).removeClass('custom-file-upload-hidden');
-       
-       
-       
+
+
+
     }
 });
 
@@ -260,7 +260,7 @@ $('.editcheckbox').on('click', function (event) {
 $('#addNew').on('click', function (event) {
     event.preventDefault();
     clearEditFields();
-    
+
     $('#add-modal').modal();//open dialog
 });
 
@@ -273,7 +273,7 @@ $('.dummy').keydown(function (e) {
 });
 
 /**
-set dummy field after 
+set dummy field after
 **/
 $('.custom-file-upload-hidden').change(function (e) {
     if(!$(e.target.parentNode.childNodes[5].childNodes[3].childNodes[1].childNodes[1]).is(':checked'))
@@ -286,22 +286,22 @@ $('.custom-file-upload-hidden').change(function (e) {
     {
         if(isUrlJs($(this).val()) )//checks if the input value is a valid url
         {
-            $(e.target).addClass('success');  
+            $(e.target).addClass('success');
             $(e.target).removeClass('error');
         }
         else
         {
-            $(e.target).addClass('error'); 
-            $(e.target).removeClass('success'); 
-        }  
+            $(e.target).addClass('error');
+            $(e.target).removeClass('success');
+        }
     }
-                                   
-                                       
+
+
 });
 
 /*$('.add').change(function (e){
     console.log(this.type);
-    
+
 });*/
 
 /**
@@ -313,20 +313,20 @@ $('.select-butn').on('click', function (event) {
 });
 
 $('#modal-save').on('click', function () {
-    
+
     if($('.error').length >0)
     {
         $('.myerror').text('Error In Input Format! Please Update And Resubmit');
         $('.myerror').addClass('error');
         return;
     }
-    
-    
+
+
     /*
         CHECK IF VALUE BEING SUPPLIED IS INPUT TEXT OR INPUT FILE AND UPDATE DATAM CORRECTLY
     */
-    
-    
+
+
     $('#modal-save').prop('disabled',true);
     var datam = new FormData($('#uploaders'));
     datam.append('edit_name', $('#edit_name').val());
@@ -343,7 +343,7 @@ $('#modal-save').on('click', function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    
+
     $.ajax({
         type: 'POST',
         url: url,
@@ -351,7 +351,7 @@ $('#modal-save').on('click', function () {
         processData: false,
         contentType: false,
         dataType: 'json'
-        
+
     }).done(function (msg) {
         //console.log('ano values sent');
         //console.log('hi');
@@ -359,7 +359,7 @@ $('#modal-save').on('click', function () {
         var resp = JSON.parse(JSON.stringify(msg));//JSON.parse(msg);
         //console.log(JSON.stringify(msg));
 		//console.log(resp);
-        
+
         if(resp.errstatus==0)
         {
             //console.log($(postBodyElement.childNodes[3].childNodes[4]));
@@ -367,11 +367,11 @@ $('#modal-save').on('click', function () {
             $('.myerror').text(resp.message);
 			$('.myerror').addClass('error');
         }
-        else{        
+        else{
             //assigning when json is returned
             $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm);
 
-            
+
             /*
                 APP FILE DETAILS HANDLING
             */
@@ -390,8 +390,8 @@ $('#modal-save').on('click', function () {
             */
            //console.log($(postBodyElement.childNodes[3].childNodes[4]).length);
             //check if the readme already exists. if not then add it
-            
-            
+
+
             if(isUrlJs(resp.post_updated.app_readme_path))
             {
                 if($(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).length<1)
@@ -408,8 +408,8 @@ $('#modal-save').on('click', function () {
             $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).attr("href",resp.post_updated.app_readme_path );
 
             $(postBodyElement.childNodes[3].childNodes[3].childNodes[4]).attr("data-name",resp.post_updated.app_readme_path) ;
-            
-           
+
+
            /*
                 MANUAL FILE DETAILS HANDLING
             */
@@ -419,7 +419,7 @@ $('#modal-save').on('click', function () {
                 {
                     $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" target="_blank" data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
                 }
-               
+
                $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).removeAttr('download');
                $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr('target','_blank');
            }
@@ -427,32 +427,32 @@ $('#modal-save').on('click', function () {
            {
                $(postBodyElement.childNodes[3].childNodes[3]).append('<a class="btn btn-info btn-sm" href="'+resp.post_updated.app_manual_path + '" data-title="manual" download data-name="'+resp.post_updated.app_manual_path+'">Manual</a> |');
            }
-           
+
            $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr("href",resp.post_updated.app_manual_path );
            $(postBodyElement.childNodes[3].childNodes[3].childNodes[2]).attr("data-name", resp.post_updated.app_manual_path) ;
-		   
-		   
+
+
 		   /*
                 ICON FILE DETAILS HANDLING
             */
-			
+
            if(resp.post_updated.app_icon_path !==null)
            {
 			   $(postBodyElement.childNodes[1].childNodes[1]).attr("src", resp.post_updated.app_icon_path);
-			   $(postBodyElement.childNodes[1].childNodes[1]).attr("data-title", "set") ;               
+			   $(postBodyElement.childNodes[1].childNodes[1]).attr("data-title", "set") ;
            }
-           
 
-           
-           
-		   
+
+
+
+
            $('#modal-save').prop('disabled',false);
            //$('#edit-modal').modal('hide');
 		   $('.myerror').text(resp.message);
 		   $('.myerror').addClass('success');
         }
     });
-    
+
 });
 
 
@@ -472,11 +472,11 @@ $('.dropdown-item').on('click', function(event) {
 
 $('.slideout').on('click', function(){
 	//WHEN CLICKED CHECK IF PANEL HAS ACTIVE CLASS
-	
+
 	//IF IT DOES NOT HAVE ACTIVE THEN
-	
+
 	//REMOVE ACTIVE FROM THE PANEL THAT HAS IT AND INITIATE A CHANGE IN ITS LEFT VALUE AND  HAVE IT SLIDE OUT OF VIEW
-	
+
 	//ADD ACTIVE TO THE CURRENT SELECTION AND HAVE IT SLIDE INTO VIEW BY SETTING LEFT VALUE TO 0
 	if(!$(this).hasClass(".active"))
 	{
@@ -485,13 +485,13 @@ $('.slideout').on('click', function(){
 			'left':'-3750px',
 		});
 		$('.active').removeClass('active');
-		
+
 		$('#'+$(this).attr("data-name")).css({
 			'left':'-21px',
 			});
 			//console.log('hi');
 			//console.log($(this).attr("data-name"));
-			
+
 		$(this).addClass("active");
 	}
 });
@@ -510,7 +510,7 @@ $('.slideout').on('click', function(){
 var headerlower =  $('.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top').height() +15; // $('.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top').offset().top +
 var lumfader = function(){
 		stop = Math.round($(window).scrollTop())+30 ;
-		
+
 		// console.log(stop);
 		// console.log(headerlower);
 		if(stop > headerlower)
@@ -546,11 +546,11 @@ function up(ev)
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 			});
-			
+
 			var datam = new FormData($('#searcher'));
 			datam.append('searchapp', keywords);
 			datam.append('_token', token);
-			
+
 			$.ajax({
 			type: 'POST',
 			url: url,
@@ -558,12 +558,12 @@ function up(ev)
 			processData: false,
 			contentType: false,
 			dataType: 'json'
-			
+
 			}).done(function (msg) {
 				$('#appscontainer').append(msg.html);
-				
+
 				//get the currently selected slideout and have it slide away from view
-				
+
 				//slideout the search container and add active to it
 				$("#searchslide").trigger("click");
 			});
@@ -629,5 +629,5 @@ $(document).ready(function(){
 
 
 
-//7 of april gk general an clifford 4827 HG 
+//7 of april gk general an clifford 4827 HG
 //Lindsay addEventListener
