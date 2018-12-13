@@ -19,7 +19,7 @@ class PostController extends Controller
     public function postCreatePost(Request $request)
     {
         $message= 'There was an error';
-		
+
         $supplier='';
         //try {
             $this->validate($request, [
@@ -38,13 +38,13 @@ class PostController extends Controller
 
                 $supplier = $request['app_uploader'];
             }
-        
+
             $is_url=false;
             $post = new Post();
             $post->app_nm = strtoupper($request['app_name']);
-            
-            $validation = 
-            
+
+            $validation =
+
               '/^((http|https|ftp)?:\/\/){1}?((([a-z\d]([a-z\\d-]*[a-z\\d])*)\.)*[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%@_.~+&:]*)*(\?[;&a-z\d%@_.,~+&:=-]*)?(\#[-a-z\d_]*)?$/i';
 		try {
             if ($request->hasFile('app_file') && $request->file('app_file')->isValid()) {
@@ -55,7 +55,7 @@ class PostController extends Controller
                 $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
                 $appFile->move($appDestinationPath, $appFileSaveLoc);
                 $post->app_path = $appDestinationPath.'/'.$appFileSaveLoc;
-            } 
+            }
             else if ( preg_match($validation, trim($request['app_file']))) {
                 $post->app_path=trim($request['app_file']);
                 $is_url=true;
@@ -101,7 +101,7 @@ class PostController extends Controller
                 $post->app_readme_path = trim($request['app_readme']);
                 $is_url=true;
             }
-			
+
 			if ($request->hasFile('app_appicon') ) {
 				$contentType = mime_content_type($request->file('app_appicon')->getPathName());
                 if ($request->file('app_appicon')->isValid() && in_array($contentType, $this->allowedMimeTypes)) {
@@ -125,29 +125,40 @@ class PostController extends Controller
             $post->created_dt = $post->aud_dt;
             $post->uploaded_dt = $post->aud_dt;
             $post->aud_uid = Auth::user()->user_name;
-        
+
             if($supplier && trim($supplier) !=='')
             {
                 $post->user_id = $supplier;
             }
-        
+
             if ($request->user()->posts()->save($post)) {
                 $message = 'Post Successfully Created!';
                 return redirect()->route('dashboard')->with(['message' => $message, 'errstatus'=>1]);
             }
-            
+
         /*} catch (\Exception $e) {
             return redirect()->route('dashboard')->with(['message' => $message . $e->getMessage(), 'errstatus'=>0]);
         }*/
-        
+
     }
-    
+
     public function getDashboard()
     {
+
+      if(Auth::user()->isAdmin())
+      {
         $posts = Post::orderBy('user_id', 'asc')->orderBy('created_dt', 'desc')->get();
+      }
+      else //if(Auth::user() != $post->user)
+      {
+        $id=Auth::user()->user_id;
+        $posts = Post::where('user_id', $id)->orderBy('created_dt', 'desc')->get();
+      }
+
+
         return view('dashboard', ['posts'=>$posts]);
     }
-    
+
     public function getWelcome()
     {
         /*$posts = Post::with(['user' => function ($query) {
@@ -160,13 +171,13 @@ class PostController extends Controller
         return view('welcome', ['posts'=>$posts, 'sidebar'=>$sidebar]);
         //orderBy('frst_nm', 'DESC')->orderBy('last_nm', 'DESC')->
     }
-    
+
     public function getDeletePost($post_id)
     {
         //$post = Post::where('app_id','>',$post_id)->first();
         //try{
         $post = Post::where('app_id', $post_id)->first();
-        
+
         //Check if user owns post
         if(Auth::user()->isAdmin())
         {}
@@ -174,12 +185,12 @@ class PostController extends Controller
         {
             return redirect()->back();
         }
-        
+
         $post->delete();
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!']);
-               
+
     }
-    
+
     public function postEditPost(Request $request)
     {
         try
@@ -193,20 +204,20 @@ class PostController extends Controller
             $change=false;
             $validation = '/^((http|https|ftp)?:\/\/){1}?((([a-z\d]([a-z\\d-]*[a-z\\d])*)\.)*[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%@_.~+&:]*)*(\?[;&a-z\d%@_.,~+&:=-]*)?(\#[-a-z\d_]*)?$/i';
             /*'/^((http|https|ftp)?:\/\/){1}?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)*[a-z]{2,}|((\\d{1,3}\.){3}\\d{1,3}))(\:\\d+)?(\/[-a-z\d%@_.~+&:]*)*(\?[;&a-z\d%@_.,~+&:=-]*)?(\\#[-a-z\d_]*)?$/i'*/
-            
+
             //"/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i";
 
 
             //Check if user owns post
              $post = Post::find($request['postId']);
             $ximo = $post->user;
-              
+
             if(Auth::user()->isAdmin())
-            {            
+            {
             }
             else if(Auth::user()->user_id != $post->user->user_id)
             {
-                return redirect()->back();                
+                return redirect()->back();
             }
 //return response()->json(['message' => $ximo == Auth::user() , 'errstatus'=>0], 200);
             if ($request->has('edit_name') && strlen(trim($request['edit_name'])) >0 && $request['edit_name'] != $post->app_nm)
@@ -226,11 +237,11 @@ class PostController extends Controller
 
             if($request->has('edit_files')  )
             {
-                if($request->hasFile('edit_files') && $request->file('edit_files')->isValid()) 
+                if($request->hasFile('edit_files') && $request->file('edit_files')->isValid())
                 {
                     if( file_exists($post->app_path) )
                     {
-                        //delete file 
+                        //delete file
                         if(!unlink(public_path($post->app_path))){
                             throw new \Exception("failed to delete app");
                         }
@@ -243,7 +254,7 @@ class PostController extends Controller
                     //$appFileExt = $appFile->getClientOriginalExtension();
                     $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
                     $appFile->move($appDestinationPath, $appFileSaveLoc);
-                    $post->app_path = $appDestinationPath.'/'.$appFileSaveLoc; 
+                    $post->app_path = $appDestinationPath.'/'.$appFileSaveLoc;
                     $change=true;
                 }
                 else if(preg_match($validation, trim($request['edit_files'])) && trim($request['edit_files']) !== $post->app_path)
@@ -264,7 +275,7 @@ class PostController extends Controller
                 {
                     if( file_exists($post->app_manual_path) )
                     {
-                        //delete file 
+                        //delete file
                         if(!unlink(public_path($post->app_manual_path))){
                             throw new \Exception("failed to delete manual");
                         }
@@ -278,8 +289,8 @@ class PostController extends Controller
                     //$appFileExt = $appFile->getClientOriginalExtension();
                     $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
                     $appFile->move($appDestinationPath, $appFileSaveLoc);
-                    $post->app_manual_path = $appDestinationPath.'/'.$appFileSaveLoc; 
-                    $change=true;   
+                    $post->app_manual_path = $appDestinationPath.'/'.$appFileSaveLoc;
+                    $change=true;
                 }
                 else if(preg_match($validation, trim($request['edit_manuals'])) && trim($request['edit_manuals']) !== $post->app_manual_path)
                 {
@@ -296,10 +307,10 @@ class PostController extends Controller
                 {
                     if( file_exists($post->app_readme_path) )
                     {
-                        //delete file 
+                        //delete file
                         if(!unlink(public_path($post->app_readme_path))){
                             throw new \Exception("failed to delete readme");
-                        }  
+                        }
                     }
                     //update with new file
 
@@ -309,29 +320,29 @@ class PostController extends Controller
                     //$appFileExt = $appFile->getClientOriginalExtension();
                     $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
                     $appFile->move($appDestinationPath, $appFileSaveLoc);
-                    $post->app_readme_path = $appDestinationPath.'/'.$appFileSaveLoc; 
-                    $change=true;   
-                    
-                }     
+                    $post->app_readme_path = $appDestinationPath.'/'.$appFileSaveLoc;
+                    $change=true;
+
+                }
                 else if(preg_match($validation, trim($request['edit_readmes'])) && trim($request['edit_readmes']) !==$post->app_readme_path  )
                 {
                     $post->app_readme_path =trim($request['edit_readmes']);
                     $change=true;
                 }
-                
+
             }
-			
+
 			if($request->has('edit_appicons') )
             {
-	
+
                 if($request->hasFile('edit_appicons') && $request->file('edit_appicons')->isValid() && in_array(mime_content_type($request->file('edit_appicons')->getPathName()), $this->allowedMimeTypes))
                 {
                     if( file_exists($post->app_icon_path) )
                     {
-                        //delete file 
+                        //delete file
                         if(!unlink(public_path($post->app_icon_path))){
                             throw new \Exception("failed to delete readme");
-                        }  
+                        }
                     }
                     //update with new file
 
@@ -341,19 +352,19 @@ class PostController extends Controller
                     //$appFileExt = $appFile->getClientOriginalExtension();
                     $appFileSaveLoc = rand(111111, 999999). $appFileName;// .".".$appFileExt;
                     $appFile->move($appDestinationPath, $appFileSaveLoc);
-                    $post->app_icon_path = $appDestinationPath.'/'.$appFileSaveLoc; 
-                    $change=true;   
-                    
-                }     
+                    $post->app_icon_path = $appDestinationPath.'/'.$appFileSaveLoc;
+                    $change=true;
+
+                }
                 else if(preg_match($validation, trim($request['edit_appicons'])) && in_array( get_headers($request['edit_appicons'],1)['Content-Type'] , $this->allowedMimeTypes) && trim($request['edit_appicons']) !==$post->app_icon_path  )
-                {	
+                {
                     $post->app_icon_path =trim($request['edit_appicons']);
                     $change=true;
                 }
-                
+
             }
 
-            
+
 
             if(!$change)
             {
@@ -374,19 +385,19 @@ class PostController extends Controller
             return response()->json(['message' => "Unexpected Error Thrown" , 'errstatus'=>0], 200); //. $e->getMessage() ." ". $e->getLine() ." ". $e->getFile()
         }
     }
-	
+
 	public function postPostSearch(Request $request)
 	{
 		try
-        {			
+        {
             $this->validate($request, [
                 'searchapp' =>'required',
             ]);
-			
+
 			$results = Post::where('app_nm', 'like', '%'. $request['searchapp'] .'%')->get();
-			
+
 			$html = view('includes.searchresults',['posts'=>$results])->render();
-			
+
 			return response()->json(['success' => true, 'html' => $html]);
 
             //$state = 'Successfully Updated Post!';
