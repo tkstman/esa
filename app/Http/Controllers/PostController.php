@@ -27,6 +27,7 @@ class PostController extends Controller
                 'app_file'=>'required',
                 'app_manual'=>'sometimes|required',
                 'app_readme'=>'sometimes|required',
+                'app_version'=>'sometimes|required',
             ]);
             //return redirect()->back()->withErrors('Got Here');
             if($request['app_uploader'])
@@ -42,6 +43,7 @@ class PostController extends Controller
             $is_url=false;
             $post = new Post();
             $post->app_nm = strtoupper($request['app_name']);
+            $post->app_version = trim($request['app_version']);
 
             $validation =
 
@@ -125,6 +127,7 @@ class PostController extends Controller
             $post->created_dt = $post->aud_dt;
             $post->uploaded_dt = $post->aud_dt;
             $post->aud_uid = Auth::user()->user_name;
+            $post->app_active = True;
 
             if($supplier && trim($supplier) !=='')
             {
@@ -147,16 +150,15 @@ class PostController extends Controller
 
       if(Auth::user()->isAdmin())
       {
-        $posts = Post::orderBy('user_id', 'asc')->orderBy('created_dt', 'desc')->get();
+        $posts = Post::where(['app_active'=> 1])->orderBy('user_id', 'asc')->orderBy('created_dt', 'desc')->get();
       }
       else //if(Auth::user() != $post->user)
       {
         $id=Auth::user()->user_id;
-        $posts = Post::where('user_id', $id)->orderBy('created_dt', 'desc')->get();
+        $posts = Post::where(['user_id'=> $id,'app_active'=> 1])->orderBy('created_dt', 'desc')->get();
       }
 
-
-        return view('dashboard', ['posts'=>$posts]);
+      return view('dashboard', ['posts'=>$posts]);
     }
 
     public function getWelcome()
@@ -166,8 +168,8 @@ class PostController extends Controller
             //$query->orderBy('last_nm', 'desc');
             //$query->orderBy('created_dt', 'desc');
         }]);*/
-        $posts = Post::orderBy('user_id', 'asc')->orderBy('app_nm', 'asc')->get();
-		$sidebar = User::hydrate(DB::select('select * from users where [SOFT_WARE].dbo.USERS.user_id in (select distinct APPLICATIONS.user_id from APPLICATIONS) order by frst_nm'));
+        $posts = Post::where(['app_active'=> 1])->orderBy('user_id', 'asc')->orderBy('app_nm', 'asc')->get();
+		    $sidebar = User::hydrate(DB::select('select * from users where [SOFT_WARE].dbo.USERS.user_id in (select distinct APPLICATIONS.user_id from APPLICATIONS) order by frst_nm'));
         return view('welcome', ['posts'=>$posts, 'sidebar'=>$sidebar]);
         //orderBy('frst_nm', 'DESC')->orderBy('last_nm', 'DESC')->
     }
@@ -185,8 +187,8 @@ class PostController extends Controller
         {
             return redirect()->back();
         }
-
-        $post->delete();
+        $post->app_active=False;
+        $post->update();
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!']);
 
     }
@@ -209,7 +211,7 @@ class PostController extends Controller
 
 
             //Check if user owns post
-             $post = Post::find($request['postId']);
+            $post = Post::find($request['postId']);
             $ximo = $post->user;
 
             if(Auth::user()->isAdmin())
@@ -219,7 +221,7 @@ class PostController extends Controller
             {
                 return redirect()->back();
             }
-//return response()->json(['message' => $ximo == Auth::user() , 'errstatus'=>0], 200);
+            //return response()->json(['message' => $ximo == Auth::user() , 'errstatus'=>0], 200);
             if ($request->has('edit_name') && strlen(trim($request['edit_name'])) >0 && $request['edit_name'] != $post->app_nm)
             {
                 if(!Post::where('app_nm', $request['edit_name'])->first())
@@ -234,7 +236,19 @@ class PostController extends Controller
                 return response()->json(['message' => $state, 'errstatus'=>0], 200);
             }
 
+            //Checking the version has been changed
+            if ($request->has('edit_version') && strlen(trim($request['edit_version'])) >0 && $request['edit_version'] != $post->app_version)
+            {
+                    $post->app_version = strtoupper($request['app_version']);
+                    $change=true;
+            }
+            else if(strlen(trim($request['app_version'])) ==0)
+            {
+                $state = "Version Cannot Be Empty! Please Provide A Version For The Application";
+                return response()->json(['message' => $state, 'errstatus'=>0], 200);
+            }
 
+            //Checking the file has been changed
             if($request->has('edit_files')  )
             {
                 if($request->hasFile('edit_files') && $request->file('edit_files')->isValid())
@@ -269,6 +283,7 @@ class PostController extends Controller
                 throw new \Exception("file not valid");
             }
 
+            //Checking the manual has been updated
             if($request->has('edit_manuals') )
             {
                 if($request->hasFile('edit_manuals') && $request->file('edit_manuals')->isValid())
@@ -300,7 +315,7 @@ class PostController extends Controller
 
             }
 
-
+            //Checking the readme file has been changed
             if($request->has('edit_readmes') )
             {
                 if($request->hasFile('edit_readmes') && $request->file('edit_readmes')->isValid())
@@ -332,7 +347,8 @@ class PostController extends Controller
 
             }
 
-			if($request->has('edit_appicons') )
+            //Checking the icon file has been changed
+			      if($request->has('edit_appicons') )
             {
 
                 if($request->hasFile('edit_appicons') && $request->file('edit_appicons')->isValid() && in_array(mime_content_type($request->file('edit_appicons')->getPathName()), $this->allowedMimeTypes))

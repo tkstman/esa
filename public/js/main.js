@@ -71,11 +71,18 @@ $('.edit').on('click', function (event) {
     //console.log(postBodyElement);
 	//console.log(postBodyElement.childNodes[3].childNodes[1].textContent.trim());
     var postName = postBodyElement.childNodes[3].childNodes[1].textContent.trim(); //The posted App Name from html
+    var postVer = postBodyElement.childNodes[3].childNodes[1].getAttribute('data-postVersion'); //version of the app from html
+    postName = postName.replace("v"+postVer,"").trim(); // remove the version from the name of the app
+
+
     postId = event.target.parentNode.parentNode.dataset['postid'];//Posted Article Element data-attribute called postid
     //console.log(postBodyElement.childNodes[2].childNodes[1].textContent.trim());
 	//console.log(event.target.parentNode.parentNode);
     $('#edit_name').val(postName); //Set the Edit Modals Name Field To posted App Name from html
     $('#edit_name').attr('data-text',postName);
+
+    $('#edit_version').val(postVer); //Set the Edit Modals Version Field To posted App Version from html
+    $('#edit_version').attr('data-text',postVer);
 
     //Get App File
     if(event.target.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[0]) //Check if the App Exe file Link exists in the htmlw
@@ -333,7 +340,8 @@ $('#modal-save').on('click', function () {
     datam.append('edit_files', $('#edit_files').attr('type') == 'file' ? $('#edit_files')[0].files[0] : $('#edit_files').val());
     datam.append('edit_manuals', $('#edit_manuals').attr('type') == 'file' ? $('#edit_manuals')[0].files[0] : $('#edit_manuals').val());
     datam.append('edit_readmes', $('#edit_readmes').attr('type') == 'file' ? $('#edit_readmes')[0].files[0] : $('#edit_readmes').val());
-	datam.append('edit_appicons', $('#edit_appicons').attr('type') == 'file' ? $('#edit_appicons')[0].files[0] : $('#edit_appicons').val());
+	  datam.append('edit_appicons', $('#edit_appicons').attr('type') == 'file' ? $('#edit_appicons')[0].files[0] : $('#edit_appicons').val());
+    datam.append('edit_version', $('#edit_version').val());
     datam.append('is_url', false);
     datam.append('postId', postId);
     datam.append('_token', token);
@@ -365,11 +373,14 @@ $('#modal-save').on('click', function () {
             //console.log($(postBodyElement.childNodes[3].childNodes[4]));
             $('#modal-save').prop('disabled',false);
             $('.myerror').text(resp.message);
-			$('.myerror').addClass('error');
+			      $('.myerror').addClass('error');
         }
-        else{
+        else
+        {
             //assigning when json is returned
-            $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm);
+            $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm + "    " + resp.post_updated.app_version);
+
+            $(postBodyElement.childNodes[3].childNodes[1]).attr("data-postVersion",resp.post_updated.app_version) ;//assign the value from the app_version.;
 
 
             /*
@@ -438,18 +449,15 @@ $('#modal-save').on('click', function () {
 
            if(resp.post_updated.app_icon_path !==null)
            {
-			   $(postBodyElement.childNodes[1].childNodes[1]).attr("src", resp.post_updated.app_icon_path);
-			   $(postBodyElement.childNodes[1].childNodes[1]).attr("data-title", "set") ;
+    			   $(postBodyElement.childNodes[1].childNodes[1]).attr("src", resp.post_updated.app_icon_path);
+    			   $(postBodyElement.childNodes[1].childNodes[1]).attr("data-title", "set") ;
            }
-
-
-
 
 
            $('#modal-save').prop('disabled',false);
            //$('#edit-modal').modal('hide');
-		   $('.myerror').text(resp.message);
-		   $('.myerror').addClass('success');
+    		   $('.myerror').text(resp.message);
+    		   $('.myerror').addClass('success');
         }
     });
 

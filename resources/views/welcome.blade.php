@@ -36,7 +36,7 @@
 									<img class="icon" src="{{$post->isSet($post->app_icon_path) ? $post->app_icon_path : 'uploads/noimageicon.png' }}" alt="Image" />
 								</div>
 								<div>
-									<p class="title" title="{{strtoupper($post->app_nm)}}"> {{strtoupper($post->app_nm)}}
+									<p class="title" title="{{strtoupper($post->app_nm)}}    v{{strtoupper($post->app_version)}}" data-postVersion="{{strtoupper($post->app_version)}}"> {{strtoupper($post->app_nm)}}&nbsp;&nbsp;&nbsp;&nbsp;<label class="versioning">v{{strtoupper($post->app_version)}}</label>
 									</p>
 									<p class="downloadables">
 										<a class="btn btn-info btn-sm" href="{{$post->app_path}}" {{$post->isUrl($post->app_path) ? 'target="_blank"' : 'download'}} data-name="{{$post->app_path}}">Download</a> |
