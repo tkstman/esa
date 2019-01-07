@@ -31,7 +31,7 @@ function clearEditFields()
     $('#edit_file').val('');
     $('#edit_manual').val('');
     $('#edit_readme').val('');
-	$('#edit_appicon').val('');
+	  $('#edit_appicon').val('');
     $('#edit_appicon').attr('data-text','');
     $('#edit_name').attr('data-text','');
     $('#edit_file').attr('data-text','');
@@ -342,6 +342,7 @@ $('#modal-save').on('click', function () {
     datam.append('edit_readmes', $('#edit_readmes').attr('type') == 'file' ? $('#edit_readmes')[0].files[0] : $('#edit_readmes').val());
 	  datam.append('edit_appicons', $('#edit_appicons').attr('type') == 'file' ? $('#edit_appicons')[0].files[0] : $('#edit_appicons').val());
     datam.append('edit_version', $('#edit_version').val());
+    console.log($('#edit_version').val());
     datam.append('is_url', false);
     datam.append('postId', postId);
     datam.append('_token', token);
@@ -377,9 +378,11 @@ $('#modal-save').on('click', function () {
         }
         else
         {
+          console.log("check if it gets here");
+          console.log("version returned: "+ resp.post_updated.app_version);
             //assigning when json is returned
-            $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm + "    " + resp.post_updated.app_version);
-
+            $(postBodyElement.childNodes[3].childNodes[1]).text(resp.post_updated.app_nm + "    v" + resp.post_updated.app_version);
+            $(postBodyElement.childNodes[3].childNodes[1]).title=resp.post_updated.app_nm + "    v" + resp.post_updated.app_version;
             $(postBodyElement.childNodes[3].childNodes[1]).attr("data-postVersion",resp.post_updated.app_version) ;//assign the value from the app_version.;
 
 

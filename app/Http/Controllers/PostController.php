@@ -239,10 +239,10 @@ class PostController extends Controller
             //Checking the version has been changed
             if ($request->has('edit_version') && strlen(trim($request['edit_version'])) >0 && $request['edit_version'] != $post->app_version)
             {
-                    $post->app_version = strtoupper($request['app_version']);
+                    $post->app_version = strtoupper($request['edit_version']);
                     $change=true;
             }
-            else if(strlen(trim($request['app_version'])) ==0)
+            else if(strlen(trim($request['edit_version'])) ==0)
             {
                 $state = "Version Cannot Be Empty! Please Provide A Version For The Application";
                 return response()->json(['message' => $state, 'errstatus'=>0], 200);
